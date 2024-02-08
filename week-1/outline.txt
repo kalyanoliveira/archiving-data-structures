@@ -1,0 +1,5 @@
+The idea for this week is to go over Chapter 1 entirely, as well as Chapters
+2.1-2.3 of the book.
+
+I'm pretty sure that they don't actually have stuff that pertains to data
+structures themselves, but they'll be teaching me about C++.
