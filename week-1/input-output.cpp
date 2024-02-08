@@ -11,5 +11,14 @@ int main(void)
     // Then, we can use `endl` from `std` to output a newline character.
     std::endl;
 
+    // Now, we are going to demonstrate input output with `cin`. We use the
+    // "input operator" `>>`.
+    std::cout << "Input a number: ";
+    int number;
+    std::cin >> number;
+
+    // Let's display that.
+    std::cout << "Your number was: " << number << std::endl;
+
     return 0;
 }
