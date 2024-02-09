@@ -18,6 +18,6 @@ void printing_stuff(const int &target) {
     std::cout << "This is the target: " << target << std::endl;
 
     // For instance, this kind of operation would be invalid:
-    /target = 7;
+    //target = 7;
 }
 
