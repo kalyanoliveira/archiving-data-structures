@@ -20,7 +20,7 @@ int main(void)
     // You can also get the size of a string:
     int index = h.size();
 
-    std::cout << h[size - 1] << std::endl;
+    std::cout << h[index - 1] << std::endl;
 
     return 0;
 }
