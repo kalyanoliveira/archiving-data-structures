@@ -2,27 +2,34 @@
 // overloading. The compiler is smart enough to figure out what the types of
 // variables are in an expression.
 
+// ==HOWEVER== you can only overload operations for user defined types
+// (classes, types imported from libraries, structs, etc), or enumerations.
+
+// For instance, this would not work, because both an int and a double are
+// primitive types.
+// int operator+(const int &x, const double &y)
+// {
+//     return x + int(y);
+// }
+
 #include <iostream>
+#include <string>
 
-int operator+(const int &x, const double &y)
-{
-    return x + int(y);
+struct BankAccount {
+    std::string owner;
+    double balance;
+};
+
+double operator+(const BankAccount &f, const BankAccount &s) {
+    return f.balance + s.balance;
 }
 
-double operator+(const double &x, const int &y)
-{
-    return x + double(y);
-}
+int main(void) {
+    BankAccount first_account = {"Kalyan", 1000.00};
+    BankAccount second_account = {"Tarik", 1000.00};
 
-int main(void)
-{
-    int n0 = 7;
-    double n1 = 7.7;
-
-    // Here, we get different results because of our operator overloading (and
-    // not a compile-time error)>
-    std::cout << n0 + n1 << std::endl;
-    std::cout << n1 + n0 << std::endl;
+    std::cout << "The total balance of the two accounts is: " <<
+        first_account + second_account << std::endl;
 
     return 0;
 }
