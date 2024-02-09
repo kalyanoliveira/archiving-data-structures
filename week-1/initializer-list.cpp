@@ -7,7 +7,6 @@
 
 class Person {
     public:
-        Person();
         Person(std::string n);
 
         std::string get_name() const;
@@ -18,11 +17,8 @@ class Person {
         std::string name;
 };
 
-Person::Person() {
-    name = "0";
-}
-
 Person::Person(std::string n) {
+    std::cout << "Initializing Person of name " << n << std::endl;
     name = n;
 }
 
