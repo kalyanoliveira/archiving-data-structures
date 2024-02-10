@@ -32,13 +32,18 @@ void print(const Something &s) {
 
 int main(void) {
     Something s0(7);
+    print(s0);
+
+    // Now, here are two examples of how you can use the auto-created copy
+    // constructors:
 
     // Copy constructor auto implemented!
     Something s1(s0);
-    Something s2(s0);
-
-    print(s0);
     print(s1);
+
+    // This is a combination of the fact that copy constructors are auto
+    // implemented, plus some compiler magic:
+    Something s2 = s2;
     print(s2);
 
     return 0;
