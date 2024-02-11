@@ -42,7 +42,6 @@ bool Dog::get_has_dna() const {
 }
 
 int main(void) {
-
     Dog d("wasssup"); 
 
     // This should now work.
