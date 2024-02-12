@@ -1,5 +1,5 @@
 // In inheritance, a protected member of a base class is acessible by member
-// functions of children classes.
+// functions of children classes, *but not from outside of the class*.
 
 #include <iostream>
 
