@@ -52,8 +52,21 @@ int main(void) {
 
     // However, here's the crazy part: calling the `print` method of `Child`
     // actually calls the `print` of `Base`.
-
     a[1]->print();
+
+    // The reason for this is, of course, "static binding."
+    
+    // I'm not quite sure what "binding" means just yet, but focus on the
+    // "static" part: it gives you a clue about what's actually happening here.
+    
+    // The compiler has to decide which method to call in `a[1]->print()`. This
+    // process is "static" because it occurs during compile-time (if it were
+    // "dynamic," it would occur during runtime).
+    
+    // The compile-time decision made by the compiler is to use the "declared
+    // type" `a[1]`.
+    // `a[1]` is declared to be a pointer to a `Person` object. Hence, calling
+    // `print()` will call the `Person` object's `print` method.
 
     return 0;    
 }
