@@ -19,6 +19,7 @@ Base::Base() {
     base_value = 7;
 }
 
+// Notice how we do not include `virtual` here.
 void Base::print() {
     std::cout << "Base: " << base_value << std::endl;
 }
@@ -39,6 +40,7 @@ Child::Child() {
     child_value = 11;
 }
 
+// Notice how we do not include `virtual` here.
 void Child::print() {
     std::cout << "Child: " << child_value << std::endl;
 }
