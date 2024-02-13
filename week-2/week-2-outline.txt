@@ -1,0 +1,2 @@
+For this week, we'll be going over chapters 3.1 and 3.2, which cover arrays and
+singly linked lists.
