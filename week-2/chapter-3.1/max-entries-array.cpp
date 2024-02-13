@@ -8,6 +8,7 @@ class Entry {
     public:
         // Every entry is initialized to 0 by default.
         Entry(const int &v = 0);
+
         int get_entry_value() const;
 
     private:
@@ -50,6 +51,10 @@ MaxEntries::MaxEntries(const int &m) {
     max_number_entries = m;
     entries = new Entry[m];
     current_number_entries = 0;
+}
+
+MaxEntries::~MaxEntries() {
+    delete [] entries;
 }
 
 void MaxEntries::add_entry(const Entry &e) {
