@@ -6,7 +6,8 @@
 // First, we define a class for a generic entry in our array called `Entry`:
 class Entry {
     public:
-        Entry(const int &v = 10);
+        // Every entry is initialized to 0 by default.
+        Entry(const int &v = 0);
         int get_entry_value() const;
 
     private:
@@ -25,10 +26,18 @@ int Entry::get_entry_value() const {
 // objects:
 class MaxEntries{
     public:
+        // Specify a constructor, which takes in the maximum possible number of
+        // entries.
         MaxEntries(const int &m);
 
+        // Since `MaxEntries` allocates, it makes sense for us to define a
+        // destructor too.
+        ~MaxEntries();
+
+        // Specify an entry-adding function.
         void add_entry(const Entry &e);
 
+        // Declare an entry-removing function by means of index.
         void remove_entry_at_index(const int &i);
 
     private:
@@ -43,17 +52,32 @@ MaxEntries::MaxEntries(const int &m) {
     current_number_entries = 0;
 }
 
-// void add_entry(const Entry &e) {
-//     // If we currently have less entries than the max, just append the new
-//     // entry `e` to our array.
-//     if (current_number_entries < max_number_entries) {
-//         entries[current_entries + 1] = e;
-//     }
-// 
-//     // If we have the max amount of possible entries, we need to first figure out if `e` is more than any of the `Entry` objects currently in our entries array.
-// }
+void MaxEntries::add_entry(const Entry &e) {
+    // If we currently have less entries than the max,
+    if (current_number_entries < max_number_entries) {
+        // Append the new entry.
+        entries[current_number_entries + 1] = e;
+        // Update the entry count.
+        current_number_entries += 1;
+        // Finish the addition process.
+        return;
+    }
+
+    // This means we have the max amount of possible entries.
+    // For every current entry:
+    // for (int i = 0; i < current_number_entires; i++) {
+    //     // If the new entry is larger than it:
+    //     if (e.get_entry_value > entries[i].get_entry_value) {
+
+    //     }
+    // }
+}
 
 int main(void) {
+    
+    // Instantiate a new `MaxEntries` object by specifying the maximum possible
+    // number of entries.
+    MaxEntries m_es(10);
 
     return 0;
 }
