@@ -69,13 +69,33 @@ void MaxEntries::add_entry(const Entry &e) {
     }
 
     // This means we have the max amount of possible entries.
-    // For every current entry:
-    // for (int i = 0; i < current_number_entires; i++) {
-    //     // If the new entry is larger than it:
-    //     if (e.get_entry_value > entries[i].get_entry_value) {
+    
+    // Initialize a "smaller entries" count.
+    int smaller_entries = 0;
+    // Initialize a "first small entry" index to -1 (because 0 is also valid
+    // index).
+    int first_small_entry = -1;
 
-    //     }
-    // }
+    // For each current entry:
+    for (int i = 0; i < current_number_entries; i++) {
+        const Entry &curr_entry = entries[i];
+
+        // If that entry is less than the new entry
+        if (curr_entry.get_entry_value() < e.get_entry_value()) {
+            // Add to smaller entries
+            smaller_entries++;
+            // If first small entry index == -1, update it.
+            if (first_small_entry = -1) first_small_entry = i;
+        }
+    }
+
+    // If there are no smaller entries, return.
+    if (smaller_entries == 0) return;
+
+    // Figure out the index of the smaller entry to remove.
+    int index_to_remove = (first_small_entry + smaller_entries) - 1;
+
+    // Make a call to the remove function.
 }
 
 int main(void) {
