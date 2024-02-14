@@ -28,6 +28,8 @@ class CircularlyLinkedList {
         const CircularlyLinkedNode &get_back_node() const;
         const CircularlyLinkedNode &get_front_node() const;
 
+        void print();
+
     private:
         CircularlyLinkedNode *cursor;
 };
@@ -69,6 +71,17 @@ void CircularlyLinkedList::add_node_after_cursor(const int &v) {
 
     // Make the next of the cursor be the new node.
     cursor->next = new_node;
+}
+
+void CircularlyLinkedList::print() {
+    std::cout << "CircularlyLinkedList: ";
+    
+    for (CircularlyLinkedNode *temp = cursor; temp != cursor; temp=temp->next) {
+        std::cout << temp->value;
+    }
+
+    std::cout << std::endl;
+
 }
 
 int main(void) {
