@@ -32,6 +32,14 @@ class CircularlyLinkedList {
         CircularlyLinkedNode *cursor;
 };
 
+void CircularlyLinkedList::CircularlyLinkedList() {
+    cursor->next = NULL;
+}
+
+bool CircularlyLinkedList::empty() const {
+    cursor->next == NULL;
+}
+
 int main(void) {
     return 0;
 }
