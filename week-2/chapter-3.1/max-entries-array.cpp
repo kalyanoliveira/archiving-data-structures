@@ -1,5 +1,5 @@
 // Here, we'll create class that manages adding only the highest values to a
-// dynamic array.
+// dynamic array, in order. Plus a removal function.
 
 #include <iostream>
 
