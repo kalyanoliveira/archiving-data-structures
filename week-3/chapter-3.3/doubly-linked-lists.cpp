@@ -29,10 +29,12 @@ class DoublyLinkedList {
         bool empty() const;
 
         void add_node_to_head(const int &v);
-        void add_node_to_tail();
+        void add_node_to_tail(const int &v);
 
         void remove_head_node();
         void remove_tail_node();
+
+        void print_forwards_backwards();
 
     private:
         DoublyLinkedNode *head;
@@ -47,8 +49,6 @@ DoublyLinkedList::DoublyLinkedList() {
 	head = new DoublyLinkedNode;
 	tail = new DoublyLinkedNode;
     head->next = tail;
-    head->prev = NULL;
-    tail->next = NULL;
 }
 
 // Define the destructor here latter ig.
@@ -58,6 +58,9 @@ DoublyLinkedList::DoublyLinkedList() {
 void DoublyLinkedList::add_node_to_head(const int &v) {
     // Create a new node.
     DoublyLinkedNode *new_node = new DoublyLinkedNode;
+
+    // Set the value of that new node:
+    new_node->value = v;
 
     // Make the next of the new node point to the next of head.
     new_node->next = head->next;
@@ -72,6 +75,39 @@ void DoublyLinkedList::add_node_to_head(const int &v) {
     head->next = new_node;
 }
 
+void DoublyLinkedList::add_node_to_tail(const int &v) {
+    // Create a new node.
+    DoublyLinkedNode *new_node = new DoublyLinkedNode;
+
+    // Set the value of that node:
+    new_node->value = v;
+
+    // Make the next of the prev of tail be the new node.
+    (tail->prev)->next = new_node;
+
+    // Make the prev of the new node be the prev of tail.
+    new_node->prev = tail->prev;
+
+    // Make the next of the new node be the tail.
+    new_node->next = tail;
+
+    // Make the prev of tail be the new node.
+    tail->prev = new_node;
+}
+
+// Here, we are printing forwards and backwards to test the doubly-linked
+// characteristic of this list.
+void DoublyLinkedList::print_forwards_backwards() {
+    std::cout << "DoublyLinkedList: ";
+
+    // Start at the first node, stop once we reach the tail node.
+    for (DoublyLinkedNode *temp = head->next; temp->next != NULL; temp=temp->next) {
+        std::cout << temp->value << " ";
+    }
+
+    std::cout << std::endl;
+}
+
 int main(void) {
     DoublyLinkedList dll;
 
@@ -79,6 +115,13 @@ int main(void) {
     dll.add_node_to_head(11);
     dll.add_node_to_head(13);
     dll.add_node_to_head(15);
+
+    dll.add_node_to_tail(7);
+    dll.add_node_to_tail(11);
+    dll.add_node_to_tail(13);
+    dll.add_node_to_tail(15);
+
+    dll.print_forwards_backwards();
 
     return 0;
 }
