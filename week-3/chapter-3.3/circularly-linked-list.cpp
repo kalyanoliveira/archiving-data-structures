@@ -16,7 +16,7 @@ class CircularlyLinkedNode {
 class CircularlyLinkedList {
     public:
         CircularlyLinkedList();
-        ~CircularlyLinkedList();
+        //~CircularlyLinkedList();
 
         bool empty() const;
 
@@ -32,12 +32,43 @@ class CircularlyLinkedList {
         CircularlyLinkedNode *cursor;
 };
 
-void CircularlyLinkedList::CircularlyLinkedList() {
+CircularlyLinkedList::CircularlyLinkedList() {
     cursor->next = NULL;
 }
 
+// void CircularlyLinkedList::~CircularlyLinkedList() {
+// }
+
 bool CircularlyLinkedList::empty() const {
-    cursor->next == NULL;
+    return cursor->next == NULL;
+}
+
+void CircularlyLinkedList::add_node_after_cursor(const int &v) {
+    // Create a new node
+    CircularlyLinkedNode *new_node = new CircularlyLinkedNode;
+
+    // Assign the value of that new node.
+    new_node->value = v;
+
+    // If the list is empty,
+    if (empty()) {
+
+        // Make the cursor point to that node.
+        cursor = new_node;
+
+        // Make the next of that new node be itself.
+        new_node->next = new_node;
+
+        // Return.
+        return;
+    }
+
+    // This means that the list is not empty.
+    // Make the next of the new node by the next of the cursor.
+    new_node->next = cursor->next;    
+
+    // Make the next of the cursor be the new node.
+    cursor->next = new_node;
 }
 
 int main(void) {
