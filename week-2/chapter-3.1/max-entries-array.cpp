@@ -72,6 +72,9 @@ void MaxEntries::add_entry(const Entry &e) {
         return;
     }
 
+    int lowest_entry_index;
+    int next_entry_index;
+
     // If we have reached the maximum cap of entries,
     if (current_number_entries == max_number_entries) {
         // If the new entry is not larger than the smallest (i.e. the last)
@@ -83,41 +86,15 @@ void MaxEntries::add_entry(const Entry &e) {
 
         // This means that the new entry is large enough to at least replace
         // the lowest (last) entry.
-        int lowest_entry_index = current_number_entries - 1;
-        int next_entry_index = lowest_entry_index - 1;
-        while (next_entry_index >= 0) {
-            // If the next_entry is larger than our new entry, 
-            if (entries[next_entry_index].get_entry_value() > e.get_entry_value()) {
-                // Place the new entry in lowest_entry_index
-                entries[lowest_entry_index] = e;
-                // Return.
-                return;
-            }
+        lowest_entry_index = current_number_entries - 1;
+        next_entry_index = lowest_entry_index - 1;
+    } else {
+        // This means that we, at the very least, have space for a new entry.
+        current_number_entries++;
 
-            // Else (if the next entry is smaller than or equal to our new entry),
-            // Place the next_entry in the lowest_entry_index
-            entries[lowest_entry_index] = entries[next_entry_index];
-            // Make the lowest_entry_index equal the next_entry_index.
-            lowest_entry_index = next_entry_index;
-            // Update the next_entry_index.
-            next_entry_index--;
-        }
-    
-        // This means that the the entry at index 0 (the largest entry) is less
-        // than **or equal** to our new entry.
-
-        // If the entry at index 0 (the largest entry) is less than our new
-        // entry, let's replace the entry at index 0 by our new entry:
-        entries[0] = e;
-        // And return.
-        return;
+        lowest_entry_index = current_number_entries;
+        next_entry_index = lowest_entry_index - 1;
     }
-
-    // This means that we, at the very least, have space for a new entry.
-    current_number_entries++;
-
-    int lowest_entry_index = current_number_entries;
-    int next_entry_index = lowest_entry_index - 1;
 
     while (next_entry_index >= 0) {
         // If the next_entry is larger than our new entry, 
