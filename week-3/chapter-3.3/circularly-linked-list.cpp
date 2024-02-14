@@ -35,14 +35,14 @@ class CircularlyLinkedList {
 };
 
 CircularlyLinkedList::CircularlyLinkedList() {
-    cursor->next = NULL;
+    cursor = NULL;
 }
 
 // void CircularlyLinkedList::~CircularlyLinkedList() {
 // }
 
 bool CircularlyLinkedList::empty() const {
-    return cursor->next == NULL;
+    return cursor == NULL;
 }
 
 void CircularlyLinkedList::add_node_after_cursor(const int &v) {
@@ -54,7 +54,6 @@ void CircularlyLinkedList::add_node_after_cursor(const int &v) {
 
     // If the list is empty,
     if (empty()) {
-
         // Make the cursor point to that node.
         cursor = new_node;
 
@@ -75,15 +74,27 @@ void CircularlyLinkedList::add_node_after_cursor(const int &v) {
 
 void CircularlyLinkedList::print() {
     std::cout << "CircularlyLinkedList: ";
-    
-    for (CircularlyLinkedNode *temp = cursor; temp != cursor; temp=temp->next) {
-        std::cout << temp->value;
+
+    if (!empty()) { 
+        CircularlyLinkedNode *temp = cursor;
+
+        do {
+            std::cout << temp->value << " ";
+            temp = temp->next;
+        } while (temp != cursor);
     }
 
     std::cout << std::endl;
-
 }
 
 int main(void) {
+    CircularlyLinkedList cll;    
+
+    cll.add_node_after_cursor(7);
+    cll.add_node_after_cursor(8);
+    cll.add_node_after_cursor(9);
+
+    cll.print();
+
     return 0;
 }
