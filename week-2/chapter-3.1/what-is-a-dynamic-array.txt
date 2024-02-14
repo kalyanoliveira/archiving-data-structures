@@ -1,0 +1,2 @@
+Remember, all we really mean by a dynamic array is one that we allocate during
+run time.
