@@ -25,7 +25,7 @@ class DoublyLinkedList {
         DoublyLinkedList();
 
         // Since we allocate memory, we should also have a constructor here.
-        // ~DoublyLinkedList();
+        ~DoublyLinkedList();
         
         bool empty() const;
 
@@ -53,8 +53,9 @@ DoublyLinkedList::DoublyLinkedList() {
 }
 
 // Define the destructor here latter ig.
-// DoublyLinkedList::~DoublyLinkedList() {
-// }
+DoublyLinkedList::~DoublyLinkedList() {
+    while (!empty()) { remove_node_from_head(); }
+}
 
 bool DoublyLinkedList::empty() const {
     return head->next == tail;
