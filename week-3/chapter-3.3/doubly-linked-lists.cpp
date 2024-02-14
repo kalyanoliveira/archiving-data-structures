@@ -28,7 +28,7 @@ class DoublyLinkedList {
         
         bool empty() const;
 
-        void add_node_to_head();
+        void add_node_to_head(const int &v);
         void add_node_to_tail();
 
         void remove_head_node();
@@ -55,12 +55,30 @@ DoublyLinkedList::DoublyLinkedList() {
 // DoublyLinkedList::~DoublyLinkedList() {
 // }
 
-void DoublyLinkedList::add_node_to_head() {
-    
+void DoublyLinkedList::add_node_to_head(const int &v) {
+    // Create a new node.
+    DoublyLinkedNode *new_node = new DoublyLinkedNode;
+
+    // Make the next of the new node point to the next of head.
+    new_node->next = head->next;
+
+    // Make the prev of the next of the new node point to the new node.
+    (new_node->next)->prev = new_node;
+
+    // Make the prev of the new node by the head.
+    new_node->prev = head;
+
+    // Make the next of head by the new node.
+    head->next = new_node;
 }
 
 int main(void) {
     DoublyLinkedList dll;
+
+    dll.add_node_to_head(7);
+    dll.add_node_to_head(11);
+    dll.add_node_to_head(13);
+    dll.add_node_to_head(15);
 
     return 0;
 }
