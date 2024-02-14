@@ -41,6 +41,8 @@ class MaxEntries{
         // Declare an entry-removing function by means of index.
         void remove_entry_at_index(const int &i);
 
+        void print();
+
     private:
         Entry *entries;
         int max_number_entries;
@@ -61,7 +63,7 @@ void MaxEntries::add_entry(const Entry &e) {
     // If we currently have less entries than the max,
     if (current_number_entries < max_number_entries) {
         // Append the new entry.
-        entries[current_number_entries + 1] = e;
+        entries[current_number_entries] = e;
         // Update the entry count.
         current_number_entries += 1;
         // Finish the addition process.
@@ -96,13 +98,30 @@ void MaxEntries::add_entry(const Entry &e) {
     int index_to_remove = (first_small_entry + smaller_entries) - 1;
 
     // Make a call to the remove function.
+    return;
+}
+
+void MaxEntries::print() { 
+    std::cout << "MaxEntries: ";
+    for (int i = 0; i < max_number_entries; i++) {
+        std::cout << entries[i].get_entry_value() << " ";
+    }
 }
 
 int main(void) {
+    const int max = 10;
     
     // Instantiate a new `MaxEntries` object by specifying the maximum possible
     // number of entries.
-    MaxEntries m_es(10);
+    MaxEntries m_es(max);
+
+    // Create a populating loop; populates all but the last entry in the array.
+    for (int i = 1; i < (max); i++) {
+        Entry e(i);
+        m_es.add_entry(e);
+    }
+
+    m_es.print();
 
     return 0;
 }
