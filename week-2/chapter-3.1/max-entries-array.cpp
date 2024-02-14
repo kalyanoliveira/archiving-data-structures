@@ -132,6 +132,30 @@ void MaxEntries::print() {
     std::cout <<std::endl;
 }
 
+void MaxEntries::remove_entry_at_index(const int &i) {
+    // If we have an invalid index,
+    if (i < 0 || i > current_number_entries - 1) {
+        // Just let the user know they messed up.
+        std::cout << "Invalid index" << std::endl;
+        return;
+    }
+
+    // The entry that should be shifted into the index i of `entries` should be
+    // the entry at i + 1.
+    int next_shift_index = i + 1;    
+
+    // This is kind of like saying "while we have not shifted the last entry."
+    while (next_shift_index <= (current_number_entries - 1)) {
+        // Move the entry at the next_shift_index to (next_shift_index - 1):
+        entries[next_shift_index - 1] = entries[next_shift_index];
+        next_shift_index++;
+    }
+
+    // Now we just have to set what was the last entry to zero.
+    entries[next_shift_index - 1] = Entry();
+
+}
+
 int main(void) {
     const int max = 10;
     
@@ -174,6 +198,15 @@ int main(void) {
 
     e = Entry(1);
     m_es.add_entry(e);
+    m_es.print();
+
+    m_es.remove_entry_at_index(5);
+    m_es.print();
+
+    m_es.remove_entry_at_index(10);
+    m_es.print();
+
+    m_es.remove_entry_at_index(0);
     m_es.print();
 
     return 0;
