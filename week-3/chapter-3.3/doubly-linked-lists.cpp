@@ -39,6 +39,28 @@ class DoublyLinkedList {
         DoublyLinkedNode *tail;
 };
 
+DoublyLinkedList::DoublyLinkedList() {
+	// For initialization, we should be making two sentinel nodes: head and tail.
+	// They should also point to each other.
+	// Head always has NULL prev.
+	// And tail always has NULL next.
+	head = new DoublyLinkedNode;
+	tail = new DoublyLinkedNode;
+    head->next = tail;
+    head->prev = NULL;
+    tail->next = NULL;
+}
+
+// Define the destructor here latter ig.
+// DoublyLinkedList::~DoublyLinkedList() {
+// }
+
+void DoublyLinkedList::add_node_to_head() {
+    
+}
+
 int main(void) {
+    DoublyLinkedList dll;
+
     return 0;
 }
