@@ -23,6 +23,7 @@ class DoublyLinkedNode {
 class DoublyLinkedList {
     public:
         DoublyLinkedList();
+
         // Since we allocate memory, we should also have a constructor here.
         // ~DoublyLinkedList();
         
@@ -31,8 +32,8 @@ class DoublyLinkedList {
         void add_node_to_head(const int &v);
         void add_node_to_tail(const int &v);
 
-        void remove_head_node();
-        void remove_tail_node();
+        void remove_node_from_head();
+        void remove_node_from_tail();
 
         void print_forwards_backwards();
 
@@ -54,6 +55,10 @@ DoublyLinkedList::DoublyLinkedList() {
 // Define the destructor here latter ig.
 // DoublyLinkedList::~DoublyLinkedList() {
 // }
+
+bool DoublyLinkedList::empty() const {
+    return head->next == tail;
+}
 
 void DoublyLinkedList::add_node_to_head(const int &v) {
     // Create a new node.
@@ -108,6 +113,38 @@ void DoublyLinkedList::print_forwards_backwards() {
     std::cout << std::endl;
 }
 
+void DoublyLinkedList::remove_node_from_head() {
+    if (empty()) return;
+
+    // Create a pointer to the node that we need to remove:
+    DoublyLinkedNode *node_to_remove = head->next;
+
+    // Make the next of head be the next of the node for removal.
+    head->next = node_to_remove->next;
+
+    // Make the prev of the next of node for removal be the head.
+    (node_to_remove->next)->prev = head;
+
+    // Now we should just be able to free the space in memory.
+    delete node_to_remove;
+}
+
+void DoublyLinkedList::remove_node_from_tail() {
+    if (empty()) return;
+
+    // Create a pointer to the node that we need to remove.
+    DoublyLinkedNode *node_to_remove = tail->prev;
+
+    // Make the next of the prev of the node to remove the tail.
+    (node_to_remove->prev)->next = tail;
+
+    // Make the prev of the tail be the prev of the node to remove.
+    tail->prev = node_to_remove->prev;
+
+    // Now we can free up our space.
+    delete node_to_remove;
+}
+
 int main(void) {
     DoublyLinkedList dll;
 
@@ -121,6 +158,14 @@ int main(void) {
     dll.add_node_to_tail(13);
     dll.add_node_to_tail(15);
 
+    dll.print_forwards_backwards();
+
+    dll.remove_node_from_head();
+    dll.remove_node_from_tail();
+    dll.print_forwards_backwards();
+
+    dll.remove_node_from_head();
+    dll.remove_node_from_tail();
     dll.print_forwards_backwards();
 
     return 0;
