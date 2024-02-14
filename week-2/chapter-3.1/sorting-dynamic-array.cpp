@@ -1,6 +1,10 @@
 // In this file, we'll create a dynamic array wrapped by a class, a function
 // that adds elements to that array, and a function that sorts the array.
 
+// The kind of sorting algorithm using during `sort()` is called "insertion
+// sort." It is an Omega(n)-BigO(n^2) time complexity algorithm, and
+// Big-Theta(n) space complexity algorithm.
+
 #include <iostream>
 
 class Entry {
