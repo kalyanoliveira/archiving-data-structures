@@ -44,6 +44,7 @@ class MaxEntries{
         void print();
 
     private:
+        // This array goes from highest entry value to lowest entry value.
         Entry *entries;
         int max_number_entries;
         int current_number_entries;
@@ -60,45 +61,101 @@ MaxEntries::~MaxEntries() {
 }
 
 void MaxEntries::add_entry(const Entry &e) {
-    // If we currently have less entries than the max,
-    if (current_number_entries < max_number_entries) {
-        // Append the new entry.
-        entries[current_number_entries] = e;
-        // Update the entry count.
-        current_number_entries += 1;
-        // Finish the addition process.
+    // If the list of entries is empty and we have not reached the maximum
+    // number of entries,
+    if (current_number_entries == 0 && current_number_entries != maximum_number_entries) {
+        // Add the new entry to our array.
+        entries[0] = e;
+        // Increase entry count.
+        current_number_entries++;
+        // Return.
         return;
     }
 
-    // This means we have the max amount of possible entries.
-    
-    // Initialize a "smaller entries" count.
-    int smaller_entries = 0;
-    // Initialize a "first small entry" index to -1 (because 0 is also valid
-    // index).
-    int first_small_entry = -1;
-
-    // For each current entry:
-    for (int i = 0; i < current_number_entries; i++) {
-        const Entry &curr_entry = entries[i];
-
-        // If that entry is less than the new entry
-        if (curr_entry.get_entry_value() < e.get_entry_value()) {
-            // Add to smaller entries
-            smaller_entries++;
-            // If first small entry index == -1, update it.
-            if (first_small_entry = -1) first_small_entry = i;
+    // If we have reached the maximum cap of entries,
+    if (current_number_entries == max_number_entries) {
+        // If the new entry is not larger than the smallest (i.e. the last)
+        // entry.
+        if (e.get_entry_value() <= entries[current_number_entries - 1].get_entry_value()) {
+            // Abort.
+            return;
         }
+
+        // This means that the new entry is large enough to at least replace
+        // the lowest (last) entry.
+        int lowest_entry_index = current_number_entries - 1;
+        int next_entry_index = lowest_entry_index - 1;
+        while (next_entry_index >= 0) {
+            // If the next_entry is larger than our new entry, 
+            if (entries[next_entry_index].get_entry_value() > e.get_entry_value()) {
+                // Place the new entry in lowest_entry_index
+                entries[lowest_entry_index] = e;
+                // Return.
+                return;
+            }
+
+            // Else (if the next entry is smaller than or equal to our new entry),
+            // Place the next_entry in the lowest_entry_index
+            entries[lowest_entry_index] = entries[next_entry_index];
+            // Make the lowest_entry_index equal the next_entry_index.
+            lowest_entry_index = next_entry_index;
+            // Update the next_entry_index.
+            next_entry_index--;
+        }
+    
+        // This means that the the entry at index 0 (the largest entry) is less
+        // than **or equal** to our new entry.
+
+        // If the entry at index 0 (the largest entry) is less than our new
+        // entry, let's replace the entry at index 0 by our new entry:
+        entries[0] = e;
+        // And return.
+        return;
     }
 
-    // If there are no smaller entries, return.
-    if (smaller_entries == 0) return;
+    // This means that we, at the very least, have space for a new entry.
+    current_number_entries++;
+    
 
-    // Figure out the index of the smaller entry to remove.
-    int index_to_remove = (first_small_entry + smaller_entries) - 1;
+    // // If we currently have less entries than the max,
+    // if (current_number_entries < max_number_entries) {
+    //     // Append the new entry.
+    //     entries[current_number_entries] = e;
+    //     // Update the entry count.
+    //     current_number_entries += 1;
+    //     // Finish the addition process.
+    //     return;
+    // }
 
-    // Make a call to the remove function.
-    return;
+    // // This means we have the max amount of possible entries.
+    // 
+    // // Initialize a "smaller entries" count.
+    // int smaller_entries = 0;
+    // // Initialize a "first small entry" index to -1 (because 0 is also valid
+    // // index).
+    // int first_small_entry = -1;
+
+    // // For each current entry:
+    // for (int i = 0; i < current_number_entries; i++) {
+    //     const Entry &curr_entry = entries[i];
+
+    //     // If that entry is less than the new entry
+    //     if (curr_entry.get_entry_value() < e.get_entry_value()) {
+    //         // Add to smaller entries
+    //         smaller_entries++;
+    //         // If first small entry index == -1, update it.
+    //         if (first_small_entry = -1) first_small_entry = i;
+    //     }
+    // }
+
+    // // If there are no smaller entries, return.
+    // if (smaller_entries == 0) return;
+
+    // // Figure out the index of the smaller entry to remove.
+    // int index_to_remove = (first_small_entry + smaller_entries) - 1;
+
+    // // Make a call to the remove function.
+    // return;
 }
 
 void MaxEntries::print() { 
