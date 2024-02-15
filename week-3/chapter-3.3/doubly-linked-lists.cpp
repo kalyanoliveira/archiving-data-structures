@@ -39,11 +39,16 @@ class DoublyLinkedList {
 
         // This is just me playing around:
         void insert_node_before_this_node(
-                DoublyLinkedNode *this_node,
-                const int &new_node_value
+            DoublyLinkedNode *this_node,
+            const int &new_node_value
         );
 
-        void test();
+        void remove_this_node(
+            DoublyLinkedNode *this_node
+        );
+
+        void test_addition_before();
+        void test_removal();
 
     private:
         DoublyLinkedNode *head;
@@ -180,13 +185,35 @@ void DoublyLinkedList::insert_node_before_this_node(
     // That should do it.
 }
 
+void DoublyLinkedList::remove_this_node(
+    DoublyLinkedNode *this_node
+) {
+    // Make the next of the prev of this_node equal the next of this_node. 
+    (this_node->prev)->next = this_node->next;
+    
+    // Make the prev of the next of this_node equal the prev of this_node.
+    (this_node->next)->prev = this_node->prev;
+
+    // Now, we should just be able to free up some memory.
+    delete this_node;
+}
+
 // This is just meant for a test of `add_node_before_this_node()`, and not
 // meant to work outside of the conditions that I created in main.
-void DoublyLinkedList::test() {
+void DoublyLinkedList::test_addition_before() {
     // Get random node after head.
     DoublyLinkedNode *arbitrary_node = head->next->next;
 
     insert_node_before_this_node(arbitrary_node, 100);
+
+    return;
+}
+
+// Same thing as the other test, but this time I'm testing removal of a node.
+void DoublyLinkedList::test_removal() {
+    DoublyLinkedNode *arbitrary_node = tail->prev->prev;
+
+    remove_this_node(arbitrary_node);
 
     return;
 }
@@ -214,7 +241,10 @@ int main(void) {
     dll.remove_node_from_tail();
     dll.print_forwards_backwards();
 
-    dll.test();
+    dll.test_addition_before();
+    dll.print_forwards_backwards();
+
+    dll.test_removal();
     dll.print_forwards_backwards();
 
     return 0;
