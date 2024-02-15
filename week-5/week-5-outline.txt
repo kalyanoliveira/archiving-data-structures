@@ -1,0 +1,2 @@
+This idea for this week is queues and dequeues (which is part of chapter 5),
+and chapter 6.
