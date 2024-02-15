@@ -31,7 +31,11 @@ class LinkedList {
 
         void remove_first_node();
         void remove_last_node();
+    
+        int get_first_node_value() const;
 
+        void reverse();
+        
     private:
         Node *head;
 };
@@ -175,6 +179,28 @@ void LinkedList::remove_last_node() {
     delete last_node;
 }
 
+int LinkedList::get_first_node_value() const {
+    return head->value;
+}
+
+void LinkedList::reverse() {
+    // Create a buffer linked list.
+    LinkedList temp;
+
+    // While the actual linked list is not empty,
+    while (!is_empty()) {
+        // Place the value of first node of the actual linked list in a node in
+        // the beginning of the buffer linked list.
+        temp.add_node_to_beginning(get_first_node_value());
+        remove_first_node();
+    }
+
+    while(!temp.is_empty()) {
+        add_node_to_end(temp.get_first_node_value());
+        temp.remove_first_node();
+    }
+}
+
 int main(void) {
     LinkedList ll;
 
@@ -183,21 +209,20 @@ int main(void) {
     ll.add_node_to_beginning(12);
     ll.add_node_to_beginning(13);
     ll.add_node_to_beginning(14);
-
-    ll.add_node_to_end(10);
-    ll.add_node_to_end(11);
-    ll.add_node_to_end(12);
-    ll.add_node_to_end(13);
-    ll.add_node_to_end(14);
-
+    ll.add_node_to_end(1);
+    ll.add_node_to_end(2);
+    ll.add_node_to_end(3);
+    ll.add_node_to_end(4);
+    ll.add_node_to_end(5);
     ll.print();
 
     ll.remove_first_node();
     ll.remove_first_node();
-
     ll.remove_last_node();
     ll.remove_last_node();
-
+    ll.print();
+    
+    ll.reverse();
     ll.print();
 
     return 0;
