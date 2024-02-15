@@ -97,6 +97,8 @@ void DLL::add_node_before_tail(const int &v) {
 }
 
 void DLL::remove_node_after_head() {
+    if (empty()) return;
+
     Node *node_to_remove = head->next;
 
     // Make the next of the node pointed by head by the next of the
@@ -110,6 +112,8 @@ void DLL::remove_node_after_head() {
 }
 
 void DLL::remove_node_before_tail() {
+    if (empty()) return;
+
     Node *node_to_remove = tail->prev;
 
     // Make the prev of the node pointed by tail be the prev of the
@@ -133,10 +137,12 @@ void DLL::print() const {
 }
 
 int DLL::get_node_after_head() const {
+    if (empty()) return -1;
     return head->next->value;
 }
 
 int DLL::get_node_before_tail() const {
+    if (empty()) return -1;
     return tail->prev->value;
 }
 
@@ -188,20 +194,28 @@ void Deque::push_back(const int &v) {
 }
 
 void Deque::remove_front() {
+    if (empty()) return;
+
     dll.remove_node_after_head();
     number_of_elements--;
 }
 
 void Deque::remove_back() {
+    if (empty()) return;
+
     dll.remove_node_before_tail();
     number_of_elements--;
 }
 
 int Deque::get_front() const {  
+    if (empty()) return -2;
+
     return dll.get_node_after_head();
 }
 
 int Deque::get_back() const {
+    if (empty()) return -2;
+
     return dll.get_node_before_tail();
 }
 
@@ -211,6 +225,9 @@ int main(void) {
     deck.push_front(1);
     deck.push_front(2);
     deck.push_back(7);
+    std::cout << deck.get_front() << std::endl;
+
+    deck.remove_front();
     std::cout << deck.get_front() << std::endl;
 
     deck.remove_front();
