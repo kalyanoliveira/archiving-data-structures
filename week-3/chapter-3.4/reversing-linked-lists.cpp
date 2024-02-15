@@ -18,14 +18,19 @@ class Node {
 class LinkedList {
     public:
         LinkedList();
-        //~LinkedList();
+        ~LinkedList();
         
         bool is_empty() const;
 
         void print() const;
 
+        // This next four signatures should be the entire interface that we
+        // need to realize reversing thing.
         void add_node_to_beginning(const int &v);
         void add_node_to_end(const int &v);
+
+        void remove_first_node();
+        void remove_last_node();
 
     private:
         Node *head;
@@ -33,6 +38,10 @@ class LinkedList {
 
 LinkedList::LinkedList() {
     head = NULL;
+}
+
+LinkedList::~LinkedList() {
+    while (!is_empty()) { remove_first_node(); }
 }
 
 bool LinkedList::is_empty() const {
@@ -105,10 +114,89 @@ void LinkedList::add_node_to_end(const int &v) {
     return;
 }
 
+void LinkedList::remove_first_node() {
+    // If the list is empty, there is nothing to remove.
+    if (is_empty()) return;
+
+    // This means that the list is not empty.
+    // Create a pointer to the node that we need to delete, which is the node
+    // pointed by head:
+    Node *node_to_delete = head;
+
+    // Make head point to the next of our node that we have to delete:
+    head = node_to_delete->next;
+
+    // Delete the node (lol this is so simple):
+    delete node_to_delete;
+    
+}
+
+void LinkedList::remove_last_node() {
+    // If the list is empty, there is nothing to do:
+    if (is_empty()) return;
+
+    // Now, we need to find the last node, and the node before it.
+    
+    // We initialize the second to last node to NULL our linked list may have
+    // only one node.
+    Node *second_to_last_node = NULL;
+
+    // We'll initially say that the last node is the node pointed by head, and
+    // move it further down the list if that is not case.
+    Node *last_node = head;
+
+    for(;
+        // We need to stop running the loop if we reach the last node.
+        // The last node is the node with `next` equal to NULL.
+        // Hence, we keep running the loop is `last_node->next` does not equal
+        // NULL.
+        last_node->next != NULL;
+        // Here, we just move both of our pointers.
+        second_to_last_node = last_node, last_node=last_node->next
+    );
+
+    // Notice how, by the end of this for loop, if `second_to_last_node` still
+    // equals NULL, then that means that our linked list has only one node.
+    // In this edge case, removal is quite simple:
+    if (second_to_last_node == NULL) {
+        // Make head point to NULL.
+        head = NULL;
+        // Free up the memory space.
+        delete last_node;
+        // Stop the function here.
+        return;
+    }
+
+    // This means that have at least two nodes.
+    // Make the second to last node point to NULL.
+    second_to_last_node->next = NULL;
+
+    // Free up the memory space.
+    delete last_node;
+}
+
 int main(void) {
     LinkedList ll;
 
     ll.add_node_to_beginning(10);
+    ll.add_node_to_beginning(11);
+    ll.add_node_to_beginning(12);
+    ll.add_node_to_beginning(13);
+    ll.add_node_to_beginning(14);
+
+    ll.add_node_to_end(10);
+    ll.add_node_to_end(11);
+    ll.add_node_to_end(12);
+    ll.add_node_to_end(13);
+    ll.add_node_to_end(14);
+
+    ll.print();
+
+    ll.remove_first_node();
+    ll.remove_first_node();
+
+    ll.remove_last_node();
+    ll.remove_last_node();
 
     ll.print();
 
