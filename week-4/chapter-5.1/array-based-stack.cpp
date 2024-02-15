@@ -18,7 +18,7 @@ class Stack {
         
         void push(const int &v);
 
-        void pop(const int &v);
+        void pop();
 
         bool is_empty() const;
 
@@ -40,6 +40,36 @@ Stack::~Stack() {
     delete [] elements;
 }
 
+void Stack::push(const int &v) {
+    // If we have reached the capacity, let's abort and simply return early.
+    if (number_of_elements == capacity) {
+        std::cout << "Push: Stack is full" << std::endl;
+        return;
+    }
+    // This means that our stack has not reached capacity, and that we can thus
+    // add another element.
+
+    // Add the new element to the array.
+    elements[number_of_elements] = v;
+
+    // Increase the element count.
+    number_of_elements++;
+
+    return;
+}
+
+void Stack::pop() {
+    // If the stack is empty, there is nothing to pop.
+    // So let's just error that.
+    if (is_empty()) {
+        std::cout << "Pop: Stack is empty" << std::endl;
+        return;
+    }
+
+    // Decrease the element count.
+    number_of_elements--;
+}
+
 bool Stack::is_empty() const {
     return number_of_elements == 0;
 }
@@ -50,7 +80,7 @@ int Stack::size() const {
 
 int Stack::peek() const {
     if (is_empty()) {
-        std::cout << "Stack is empty, returning -1";
+        std::cout << "Peek: Stack is empty, returning -1" << std::endl;
         return -1;
     }
 
@@ -59,6 +89,18 @@ int Stack::peek() const {
 
 int main(void) {
     Stack s(10);
+
+    s.push(7);
+    s.push(8);
+    s.push(9);
+    std::cout << s.peek() << std::endl;
+
+    s.pop();
+    s.pop();
+    std::cout << s.peek() << std::endl;
+
+    s.pop();
+    std::cout << s.peek() << std::endl;
 
     return 0;
 }
