@@ -1,3 +1,4 @@
+- exceptions.
 - solid acronym for the 5 OOD principles.
 - analysis tools.
 - slides L6 and chapter four time complexity and recursion stuff
