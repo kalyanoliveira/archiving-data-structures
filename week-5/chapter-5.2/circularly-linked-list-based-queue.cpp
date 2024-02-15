@@ -31,6 +31,8 @@ class CLL {
 
         void advance_cursor();
 
+        void print();
+
     private:
         Node* cursor;
 };
@@ -48,13 +50,12 @@ bool CLL::is_empty() const {
 }
 
 void CLL::remove_node_after_cursor() {
-    if (is_empty()) return;
 
     // Create a pointer to the node that we need to delete.
     Node *node_to_delete = cursor->next;
 
     // If we only have one node,
-    if (node_to_delete = cursor) {
+    if (node_to_delete->next = node_to_delete) {
         // Make the cursor point to nothing. After all, the list should be
         // empty after this.
         cursor = NULL;
@@ -102,10 +103,24 @@ int CLL::get_frontal_node_value() const {
     return (cursor->next)->value;
 }
 
-
 void CLL::advance_cursor() {
     if (is_empty()) return;
     cursor = cursor->next;
+}
+
+void CLL::print() {
+    std::cout << "CircularlyLinkedList: ";
+
+    if (!is_empty()) { 
+        Node *temp = cursor;
+
+        do {
+            std::cout << temp->value << " ";
+            temp = temp->next;
+        } while (temp != cursor);
+    }
+
+    std::cout << std::endl;
 }
 
 class Queue {
@@ -124,9 +139,61 @@ class Queue {
     private:
         CLL cll;
         int number_of_elements;
+};
+
+Queue::Queue() {
+    number_of_elements = 0;
+}
+
+bool Queue::is_empty() const {
+    return number_of_elements == 0;
+}
+
+void Queue::enqueue(const int &v) {
+    // First, we need to insert the node in the CLL.
+    cll.insert_node_after_cursor(v);
+
+    // Then, we need to update our element count:
+    number_of_elements++;  
+   
+    // Then, we need to advance our cursor.
+    cll.advance_cursor();
+}
+
+void Queue::dequeue() {
+    // If the queue is empty, abort.
+    if (is_empty()) {
+        std::cout << "Dequeue: Queue is currently empty, aborting..." << std::endl;
+        return;
+    }
+
+    // Remove the frontal node in the CLL.
+    cll.remove_node_after_cursor();
+
+    // Decrease the element count.
+    number_of_elements--;
+}
+
+int Queue::peek_front() const {
+    if (is_empty()) {
+        std::cout << "Peek front: Queue is currently empty, returning -1..." << std::endl;
+        return -1;
+    }
+
+    return cll.get_frontal_node_value();
+    
 }
 
 int main(void) {
+    CLL cll;
+
+    cll.insert_node_after_cursor(10);
+    cll.insert_node_after_cursor(11);
+    cll.insert_node_after_cursor(12);
+    cll.print();
+
+    cll.remove_node_after_cursor();
+    cll.print();
 
     return 0;
 }
