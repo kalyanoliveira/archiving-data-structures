@@ -37,6 +37,14 @@ class DoublyLinkedList {
 
         void print_forwards_backwards();
 
+        // This is just me playing around:
+        void insert_node_before_this_node(
+                DoublyLinkedNode *this_node,
+                const int &new_node_value
+        );
+
+        void test();
+
     private:
         DoublyLinkedNode *head;
         DoublyLinkedNode *tail;
@@ -146,6 +154,43 @@ void DoublyLinkedList::remove_node_from_tail() {
     delete node_to_remove;
 }
 
+// I know that this is too verbose, but I just don't care.
+void DoublyLinkedList::insert_node_before_this_node(
+    DoublyLinkedNode *this_node,
+    const int &new_node_value
+) {
+    // Create a new node in memory.
+    DoublyLinkedNode *new_node = new DoublyLinkedNode;
+
+    // Assign the value of that new node.
+    new_node->value = new_node_value;
+
+    // Make the next of the new node be `this_node`.
+    new_node->next = this_node;
+
+    // Make the prev of the new node be the prev of `this_node`.
+    new_node->prev = this_node->prev;
+
+    // Make the next of the prev of `this_node` be the new_node.
+    (this_node->prev)->next = new_node;
+
+    // Make the prev of `this_node` be the new_node.
+    this_node->prev = new_node;
+
+    // That should do it.
+}
+
+// This is just meant for a test of `add_node_before_this_node()`, and not
+// meant to work outside of the conditions that I created in main.
+void DoublyLinkedList::test() {
+    // Get random node after head.
+    DoublyLinkedNode *arbitrary_node = head->next->next;
+
+    insert_node_before_this_node(arbitrary_node, 100);
+
+    return;
+}
+
 int main(void) {
     DoublyLinkedList dll;
 
@@ -167,6 +212,9 @@ int main(void) {
 
     dll.remove_node_from_head();
     dll.remove_node_from_tail();
+    dll.print_forwards_backwards();
+
+    dll.test();
     dll.print_forwards_backwards();
 
     return 0;
