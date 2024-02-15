@@ -55,7 +55,7 @@ void CLL::remove_node_after_cursor() {
     Node *node_to_delete = cursor->next;
 
     // If we only have one node,
-    if (node_to_delete->next = node_to_delete) {
+    if (node_to_delete->next == node_to_delete) {
         // Make the cursor point to nothing. After all, the list should be
         // empty after this.
         cursor = NULL;
@@ -185,15 +185,21 @@ int Queue::peek_front() const {
 }
 
 int main(void) {
-    CLL cll;
+    Queue q;
 
-    cll.insert_node_after_cursor(10);
-    cll.insert_node_after_cursor(11);
-    cll.insert_node_after_cursor(12);
-    cll.print();
+    q.enqueue(1);
+    q.enqueue(2);
+    q.enqueue(3);
+    std::cout << q.peek_front() << std::endl;
 
-    cll.remove_node_after_cursor();
-    cll.print();
+    q.dequeue();
+    std::cout << q.peek_front() << std::endl;
+
+    q.dequeue();
+    std::cout << q.peek_front() << std::endl;
+
+    q.dequeue();
+    std::cout << q.peek_front() << std::endl;
 
     return 0;
 }
