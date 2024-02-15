@@ -43,7 +43,7 @@ void LinkedList::print() const {
     std::cout << "LinkedList: ";
 
     if (!is_empty()) {
-        for (Node *temp = head; temp->next != NULL; temp=temp->next) {
+        for (Node *temp = head; temp != NULL; temp=temp->next) {
             std::cout << temp->value << " ";
         }
     }
@@ -109,16 +109,6 @@ int main(void) {
     LinkedList ll;
 
     ll.add_node_to_beginning(10);
-    ll.add_node_to_beginning(11);
-    ll.add_node_to_beginning(12);
-    ll.add_node_to_beginning(13);
-    ll.add_node_to_beginning(14);
-
-    // ll.add_node_to_end(10);
-    // ll.add_node_to_end(11);
-    // ll.add_node_to_end(12);
-    // ll.add_node_to_end(13);
-    // ll.add_node_to_end(14);
 
     ll.print();
 
