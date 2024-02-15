@@ -24,7 +24,7 @@ class LinkedList {
 
         void print() const;
 
-        void add_node_after_head(const int &v);
+        void add_node_to_beginning(const int &v);
         void add_node_to_end(const int &v);
 
     private:
@@ -51,7 +51,7 @@ void LinkedList::print() const {
     std::cout << std::endl;
 }
 
-void LinkedList::add_node_after_head(const int &v) {
+void LinkedList::add_node_to_beginning(const int &v) {
     // Create a new node in memory, and a pointer to it.
     Node *new_node = new Node;
 
@@ -67,19 +67,58 @@ void LinkedList::add_node_after_head(const int &v) {
     head = new_node;
 }
 
-void add_node_to_end(const int &v) {
+void LinkedList::add_node_to_end(const int &v) {
     // Let's do the whole "new node creation" process shabang.
-    return
+    // First, we allocate some space in memory for a new node, and get a
+    // pointer to it.
+    Node *new_node = new Node;
+    // Then we assing the value of that new node:
+    new_node->value = v;
+
+    // The new_node should be the end of the list, hence the next of new_node
+    // should be NULL:
+    new_node->next = NULL; 
+
+    // Now, we have to find the actual last node of the list.
+    Node *last_node;
+
+    // If the list is not empty,
+    if (!is_empty()) {
+        for (
+            last_node = head; 
+            // The last node in the linked list points to NULL.
+            last_node->next != NULL;
+            last_node = last_node->next
+        );
+
+        // Now that we have the last node of the list, we just have to make the
+        // next of the last node be the new node.
+        last_node->next = new_node;
+        
+        
+    } else {
+        // This means that the list is empty. We just need to make head point
+        // to the new node.
+        head = new_node;
+    }
+
+    return;
 }
 
 int main(void) {
     LinkedList ll;
 
-    ll.add_node_after_head(10);
-    ll.add_node_after_head(11);
-    ll.add_node_after_head(12);
-    ll.add_node_after_head(13);
-    ll.add_node_after_head(14);
+    ll.add_node_to_beginning(10);
+    ll.add_node_to_beginning(11);
+    ll.add_node_to_beginning(12);
+    ll.add_node_to_beginning(13);
+    ll.add_node_to_beginning(14);
+
+    // ll.add_node_to_end(10);
+    // ll.add_node_to_end(11);
+    // ll.add_node_to_end(12);
+    // ll.add_node_to_end(13);
+    // ll.add_node_to_end(14);
 
     ll.print();
 
