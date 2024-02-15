@@ -24,10 +24,14 @@ class LinkedList {
         bool is_empty();
 
         void add_node_to_front(const int &v);
-
         void remove_frontal_node();
 
         void print();
+
+        // This assumes that the user will not mess up and call this when the
+        // list is empty.
+        // Which is not great, but whatever.
+        int get_frontal_node_value() const;
 
     private:
         Node *head; 
@@ -84,10 +88,20 @@ void LinkedList::print() {
     std::cout << std::endl;
 }
 
+// This assumes that the user will not mess up and call this when the
+// list is empty.
+// Which is not great, but whatever.
+int LinkedList::get_frontal_node_value() const {
+    return head->value;
+}
+
 class Stack {
     public:
         Stack();
-        ~Stack();
+
+        // We don't actually need a destructor, since the Stack class per se
+        // does not allocate.
+        //~Stack();
 
         bool is_empty() const;
 
@@ -102,24 +116,52 @@ class Stack {
     private:
         LinkedList ll;
         int number_of_elements;
+};
+
+Stack::Stack() {
+    number_of_elements = 0;
+}
+
+bool Stack::is_empty() const {
+    return number_of_elements == 0;
+}
+
+int Stack::size() const {
+    return number_of_elements;
+}   
+
+void Stack::push(const int &v) {
+    ll.add_node_to_front(v);
+    number_of_elements++;
+}
+
+void Stack::pop() {
+    ll.remove_frontal_node();
+    number_of_elements--;
+}
+
+int Stack::peek() const {
+    if (is_empty()) {
+        std::cout << "Peek: Stack is empty, returning -1" << std::endl;
+        return -1;
+    }
+
+    return ll.get_frontal_node_value();
 }
 
 int main(void) {
-    LinkedList ll;
-    
-    ll.add_node_to_front(10);
-    ll.add_node_to_front(20);
-    ll.add_node_to_front(30);
-    ll.print();
+    Stack s;
 
-    ll.remove_frontal_node();
-    ll.print();
+    s.push(10);
+    s.push(11);
 
-    ll.remove_frontal_node();
-    ll.print();
+    std::cout << s.peek() << std::endl;
 
-    ll.remove_frontal_node();
-    ll.print();
+    s.pop();
+    std::cout << s.peek() << std::endl;
+
+    s.pop();
+    std::cout << s.peek() << std::endl;
 
     return 0;
 }
