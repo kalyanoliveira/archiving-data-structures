@@ -85,7 +85,7 @@ void CircularlyLinkedList::remove_node_after_cursor() {
     CircularlyLinkedNode *node_to_delete = cursor->next;
 
     // If we only have one node,
-    if (node_to_delete->next = node_to_delete) {
+    if (node_to_delete->next == node_to_delete) {
         // Make the cursor NULL.
         cursor = NULL;
 
@@ -140,7 +140,15 @@ int main(void) {
     std::cout << cll.get_front_node_value() << std::endl;
     
     cll.advance();
+    cll.print();
 
+    cll.remove_node_after_cursor();
+    cll.print();
+
+    cll.remove_node_after_cursor();
+    cll.print();
+
+    cll.remove_node_after_cursor();
     cll.print();
 
     return 0;
