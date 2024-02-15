@@ -28,6 +28,9 @@ class DLL {
 
         void print() const;
 
+        int get_node_after_head() const;
+        int get_node_before_tail() const;
+
     private:
         // These are sentinel nodes.
         Node *head;
@@ -129,22 +132,93 @@ void DLL::print() const {
     std::cout << std::endl;
 }
 
-int main(void) {
-    DLL dll;
+int DLL::get_node_after_head() const {
+    return head->next->value;
+}
 
-    dll.add_node_after_head(1);
-    dll.add_node_after_head(2);
-    dll.add_node_after_head(3);
-    dll.print();
+int DLL::get_node_before_tail() const {
+    return tail->prev->value;
+}
 
-    dll.add_node_before_tail(1);
-    dll.add_node_before_tail(2);
-    dll.add_node_before_tail(3);
-    dll.print();
+class Deque {
+    public:
+        Deque();
+        
+        // No destructor since deque itself does not allocate.
+        // ~Deque();
+        
+        bool empty() const;
 
+        int size() const;
+
+        void push_front(const int &v);
+        void push_back(const int &v);
+
+        void remove_front();
+        void remove_back();
+
+        int get_front() const;
+        int get_back() const;
+    
+    private:
+        DLL dll;
+        int number_of_elements;
+};
+
+Deque::Deque() {
+    number_of_elements = 0;
+}
+
+bool Deque::empty() const {
+    return number_of_elements == 0;
+}
+
+int Deque::size() const {
+    return number_of_elements;
+}
+
+void Deque::push_front(const int &v) {
+    dll.add_node_after_head(v);
+    number_of_elements++;
+}
+
+void Deque::push_back(const int &v) {
+    dll.add_node_before_tail(v);
+    number_of_elements++;
+}
+
+void Deque::remove_front() {
     dll.remove_node_after_head();
+    number_of_elements--;
+}
+
+void Deque::remove_back() {
     dll.remove_node_before_tail();
-    dll.print();
+    number_of_elements--;
+}
+
+int Deque::get_front() const {  
+    return dll.get_node_after_head();
+}
+
+int Deque::get_back() const {
+    return dll.get_node_before_tail();
+}
+
+int main(void) {
+    Deque deck;
+    
+    deck.push_front(1);
+    deck.push_front(2);
+    deck.push_back(7);
+    std::cout << deck.get_front() << std::endl;
+
+    deck.remove_front();
+    std::cout << deck.get_front() << std::endl;
+
+    deck.remove_front();
+    std::cout << deck.get_front() << std::endl;
+    
 
     return 0;
 }
