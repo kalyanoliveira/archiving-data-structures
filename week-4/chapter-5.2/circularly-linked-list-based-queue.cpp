@@ -108,6 +108,24 @@ void CLL::advance_cursor() {
     cursor = cursor->next;
 }
 
+class Queue {
+    public:
+        Queue();
+
+        int size() const;
+
+        bool is_empty() const;
+
+        void enqueue(const int &v);
+        void dequeue();
+
+        int peek_front() const;
+
+    private:
+        CLL cll;
+        int number_of_elements;
+}
+
 int main(void) {
 
     return 0;
