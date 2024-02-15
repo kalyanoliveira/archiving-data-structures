@@ -84,6 +84,26 @@ void LinkedList::print() {
     std::cout << std::endl;
 }
 
+class Stack {
+    public:
+        Stack();
+        ~Stack();
+
+        bool is_empty() const;
+
+        int size() const;
+
+        void push(const int &v);
+
+        void pop();
+
+        int peek() const;
+
+    private:
+        LinkedList ll;
+        int number_of_elements;
+}
+
 int main(void) {
     LinkedList ll;
     
