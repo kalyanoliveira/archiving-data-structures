@@ -1,5 +1,4 @@
-// A stack is dead simple: you have push, pop, and top (which just returns the
-// value of the top element) functions.
+// A stack is dead simple: you have push, pop, and peek functions.
 
 // Optionally, you may also have an is_empty() function and a size() function.
 
@@ -15,11 +14,15 @@ class Stack {
         // We a need destructor, since we are allocating space in memory.
         ~Stack();
 
-        int top();
+        int peek() const;
         
         void push(const int &v);
 
         void pop(const int &v);
+
+        bool is_empty() const;
+
+        int size() const;
 
     private:
         int *elements;
@@ -35,6 +38,23 @@ Stack::Stack(const int &c) {
 
 Stack::~Stack() {
     delete [] elements;
+}
+
+bool Stack::is_empty() const {
+    return number_of_elements == 0;
+}
+
+int Stack::size() const {
+    return number_of_elements;
+}
+
+int Stack::peek() const {
+    if (is_empty()) {
+        std::cout << "Stack is empty, returning -1";
+        return -1;
+    }
+
+    return elements[number_of_elements - 1];
 }
 
 int main(void) {
