@@ -32,7 +32,7 @@ void DLL::insert_node_after_head(const char &v) {
     DLNode *new_node = new DLNode;
 
     // Set the value of that new node.
-    new_node->- value= v;
+    new_node-> value= v;
 
     // Make the next of the new node be the next of head-node.
     new_node->next = head->next;
@@ -47,13 +47,13 @@ void DLL::insert_node_after_head(const char &v) {
     head->next = new_node;
 }
 
-void DLL::insert_node_before_tail(const int &v) {
+void DLL::insert_node_before_tail(const char &v) {
     // Create space for a new node in memory, and get a pointer to that
     // location
     DLNode *new_node = new DLNode;
 
     // Set the value of that new node.
-    new_node->- value= v;
+    new_node-> value= v;
 
     // Make the prev of the new node be the prev of the tail-node.
     new_node->prev = tail->prev;
@@ -69,6 +69,9 @@ void DLL::insert_node_before_tail(const int &v) {
 }
 
 void DLL::remove_node_after_head() {
+    // If the list is emtpy, there's nothing to do.
+    if (empty()) return;
+
     // Bind a pointer to the node that we need to delete.
     DLNode *node_to_delete = head->next;
 
@@ -84,6 +87,9 @@ void DLL::remove_node_after_head() {
 }
 
 void DLL::remove_node_before_tail() {
+    // If the list is empty, there's nothing to do.
+    if (empty()) return;
+
     // Bind a pointer to the node that we need to delete.
     DLNode *node_to_delete = head->next;
 
@@ -101,8 +107,16 @@ void DLL::remove_node_before_tail() {
 
 void DLL::test_linkage_by_printing() {
     std::cout << "DLL: ";
-    std::cout << "(Printing forwards)";
 
+    std::cout << "(Printing forwards) ";
     for (DLNode *temp = head->next; temp->next != NULL; temp=temp->next) {
+        std::cout << temp->value << " ";
     }
+    std::cout << std::endl;
+
+    std::cout << "(Printing backwards) ";
+    for (DLNode *temp = tail->prev; temp->prev != NULL; temp=temp->prev) {
+        std::cout << temp->value << " ";
+    }
+    std::cout << std::endl;
 }
