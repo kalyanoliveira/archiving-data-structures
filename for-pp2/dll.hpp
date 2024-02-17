@@ -1,5 +1,5 @@
 // Just a simple doubly linked list interface.
-#include "dll_node.hpp"
+#include "dll-node.hpp"
 
 #ifndef DLL_H
 #define DLL_H
