@@ -23,6 +23,9 @@ class DLL {
         // implementation of this interface.
         void test_linkage_by_printing();
 
+        char get_node_after_head_value() const;
+        char get_node_before_tail_value() const;
+
     private:
         // These are sentinel nodes: they won't hold any value that is
         // meaningful to us.

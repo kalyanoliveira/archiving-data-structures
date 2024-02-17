@@ -120,3 +120,11 @@ void DLL::test_linkage_by_printing() {
     }
     std::cout << std::endl;
 }
+
+char DLL::get_node_after_head_value() const {
+    return head->next->value;
+}
+
+char DLL::get_node_before_tail_value() const {
+    return tail->prev->value;
+}

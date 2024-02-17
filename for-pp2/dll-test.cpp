@@ -9,6 +9,12 @@ int main(void) {
     dll.insert_node_after_head('c');
     dll.test_linkage_by_printing();
 
+    std::cout << "testing this: " << dll.get_node_after_head_value() <<
+        std::endl;
+    
+    std::cout << "testing this: " << dll.get_node_before_tail_value() <<
+        std::endl;
+
     dll.insert_node_before_tail('a');
     dll.insert_node_before_tail('b');
     dll.insert_node_before_tail('c');
