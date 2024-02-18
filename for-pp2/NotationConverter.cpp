@@ -41,8 +41,8 @@ std::string NotationConverter::prefixToPostfix(std::string inStr) {
 
 // Yeah, we could use some library for this, but I'm not sure if I'm allowed to
 // do that.
-void NotationConverter::clear_string_from_whitespace(std::string &s) {
-    int new_index = 0
+void NotationConverter::remove_whitespace_from_string(std::string &s) {
+    int new_index = 0;
 
     // For every character in the string,
     for (int i = 0; i < s.length(); i++) {

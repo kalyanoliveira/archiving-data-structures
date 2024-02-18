@@ -14,9 +14,8 @@ class NotationConverter : public NotationConverterInterface {
         virtual std::string prefixToInfix(std::string inStr);
         virtual std::string prefixToPostfix(std::string inStr);
 
-    private:
         // I mean, the name already implies what we want with this:
-        void clear_string_from_whitespace(std::string &s);
+        void remove_whitespace_from_string(std::string &s);
 };
 
 #endif

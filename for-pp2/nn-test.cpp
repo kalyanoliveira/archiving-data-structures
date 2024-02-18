@@ -9,7 +9,7 @@ int main(void) {
 
     std::string something = " asdf asdf a d ds fsd f     sd1 ";        
 
-    something = remove_spaces_from_string(something);
+    nc.remove_whitespace_from_string(something);
 
     std::cout << something << std::endl;
 
