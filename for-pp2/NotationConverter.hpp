@@ -6,10 +6,17 @@
 
 class NotationConverter : public NotationConverterInterface {
     public:
-        NotationConverter();
+        virtual std::string postfixToInfix(std::string inStr);
+        virtual std::string postfixToPrefix(std::string inStr);
+
+        virtual std::string infixToPostfix(std::string inStr);
+        virtual std::string infixToPrefix(std::string inStr);
+
+        virtual std::string prefixToInfix(std::string inStr);
+        virtual std::string prefixToPostfix(std::string inStr);
 
     private:
-        Deque d;
+
 };
 
 #endif
