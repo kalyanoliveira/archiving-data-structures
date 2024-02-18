@@ -13,7 +13,7 @@
 
 // Uses loop.
 std::string NotationConverter::postfixToInfix(std::string inStr) {
-    return "hello";
+    return prefixToInfix(postfixToPrefix(inStr));
 }
 
 // Fully implemented.
@@ -162,7 +162,49 @@ std::string NotationConverter::infixToPrefix(std::string inStr) {
 
 // Fully implemented.
 std::string NotationConverter::prefixToInfix(std::string inStr) {
-    return "hello";
+    remove_whitespace_from_string(inStr);
+
+    // Use a deque as a stack.
+    Deque d;
+
+    // Create the output string.
+    std::string output;
+
+    // For each character in the string, == but in reverse order ==,
+    for (int i = inStr.length(); i >= 0; i--) {
+
+        // If the character is an operand,
+        if (inStr[i] >= 'a' && inStr[i] <= 'z' || inStr[i] >= 'A' && inStr[i] <= 'Z') {
+            // Push it to the stack.
+            d.push_to_front(std::string(1, inStr[i]));
+
+            // Jump to the next iteration of the loop.
+            continue;
+        }
+
+        // If the character is an operator,
+        if (inStr[i] == '*' || inStr[i] == '/' || inStr[i] == '+' || inStr[i] == '-') {
+            // Pop two from the top of the stack.
+            std::string first = d.pop_front();
+            std::string second = d.pop_front();
+
+            // Create a new string that is "(" + "first" + "operator" + "second" + ")".
+            std::string temp = "(" + first + inStr[i] + second + ")";
+
+            // Push that new string to the top of the stack (it's kind of like
+            // it's the new operand)
+            d.push_to_front(temp);
+        }
+
+    }
+
+    // While the stack is not empty.
+    while (!d.empty()) {
+        // Pop the stack, and append it to the output.
+        output += d.pop_front();
+    }
+
+    return output;
 }
 
 // Uses loop.
@@ -201,6 +243,8 @@ void NotationConverter::remove_whitespace_from_string(std::string &s) {
     return;
 }
 
+// This is just used to return the precedence of operators.
+// * and / have higher precedence than + and -.
 int NotationConverter::p(const char &c) {
     if (c == '*' || c == '/') return 2;
     else if (c == '+' || c == '-') return 1;

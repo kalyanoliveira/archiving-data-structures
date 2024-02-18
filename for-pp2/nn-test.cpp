@@ -5,7 +5,7 @@
 int main(void) {
     NotationConverter nc;
 
-    std::string s = nc.postfixToPrefix("X Y + A B + *");
+    std::string s = nc.postfixToInfix("ab+");
 
     std::cout << s << std::endl;
 
