@@ -12,6 +12,9 @@ class Deque {
         // ~Deque();
         
         bool empty() const;
+
+        // To use a deque like a stack, we use the front functions.
+        // To use a deque like a queue, we push to the back, and pop the front. 
         
         void push_to_front(const char &c);
         void push_to_back(const char &c);

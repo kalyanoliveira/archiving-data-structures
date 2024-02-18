@@ -1,5 +1,7 @@
 #include "NotationConverter.hpp"
 #include <string>
+#include "deque.hpp"
+#include <iostream>
 
 // We'll implement the following functions "fully:"
 // - infix to postfix
@@ -21,7 +23,105 @@ std::string NotationConverter::postfixToPrefix(std::string inStr) {
 
 // Fully implemented.
 std::string NotationConverter::infixToPostfix(std::string inStr) {
-    return "hello";
+    remove_whitespace_from_string(inStr);
+
+    // Get a stack by adapting it from a deque.
+    // This means we'll only be pushing to the front, and popping the front.
+    Deque d;
+
+    // Let's create an output string.
+    std::string output;
+
+    // For every character in the input string,
+    for (int i = 0; i < inStr.length(); i++) {
+
+        // ==
+        std::cout << "curr char " << inStr[i] << " ";
+
+        // If the character is an operand (i.e, a letter), 
+        if (inStr[i] >= 'a' && inStr[i] <= 'z' || inStr[i] >= 'A' && inStr[i] <= 'Z') {
+
+            // ==
+            std::cout << "is a letter" << std::endl;
+
+            // Append to output.
+            output += inStr[i];
+            // Jump to next iteration of the loop.
+            continue;
+        }
+
+        // If we get an opening parentheses (, 
+        if (inStr[i] == '(') {
+
+            // ==
+            std::cout << "is an opening parentheses" << std::endl;
+
+            // Push it to the top of the stack.
+            d.push_to_front('(');
+            // Jump to next iteration of the loop.
+            continue;
+        }
+
+        // If we get a closing parentheses ),
+        if (inStr[i] == ')') {
+
+            // ==
+            std::cout << "is an closing parentheses" << std::endl;
+
+            // While the top element of the stack is not an opening parentheses (,
+            while (d.peek_front() != '(') {
+                // Append the top of the stack to the output.
+                output += d.peek_front();
+                // Pop the top of the stack.
+                d.pop_front();
+            }
+        
+            // This means that the top element of the stack is currently a (.
+            
+            // Let's pop it too, but **not** append it to the output:
+            d.pop_front();
+
+            // And now, we continue to the next iteration of the loop.
+            continue;
+        }
+
+        // Under our inputs, our only option right now is to have an operator.
+        // Nevertheless, let's check for it:
+        if (inStr[i] == '*' || inStr[i] == '/' || inStr[i] == '+' || inStr[i] == '-') {
+
+            // ==
+            std::cout << "is an operator" << std::endl;
+
+            // While the precedence of the operator on top of the stack is
+            // greater than or equal to the precedence of the operator in
+            // `inStr[i]`, OR while the stack is not empty,
+            while (!d.empty() && p(d.peek_front()) > p(inStr[i])
+                    || !d.empty() && p(d.peek_front()) == p(inStr[i])) {
+                // Append the top of the stack to the output.
+                output += d.peek_front();
+                // Pop the top of the stack.
+                d.pop_front();
+            }
+
+            // This either means that:
+            // - the stack is empty
+            // - the operator on the top of the stack has less precedence than
+            // the operator in `inStr[i]`.
+            
+            // So let's just push `inStr[i]` to the top of the stack:
+            d.push_to_front(inStr[i]);
+        }
+
+    }
+
+    // Now, all we have to do is pop the remaining elements from the stack, and
+    // append them to the output.
+    while (!d.empty()) {
+        output += d.peek_front();
+        d.pop_front();
+    }
+
+    return output;
 }
 
 // Uses loop.
