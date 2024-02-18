@@ -157,7 +157,7 @@ std::string NotationConverter::infixToPostfix(std::string inStr) {
 
 // Uses loop.
 std::string NotationConverter::infixToPrefix(std::string inStr) {
-    return "hello";
+    return postfixToPrefix(infixToPostfix(inStr));
 }
 
 // Fully implemented.
@@ -209,7 +209,7 @@ std::string NotationConverter::prefixToInfix(std::string inStr) {
 
 // Uses loop.
 std::string NotationConverter::prefixToPostfix(std::string inStr) {
-    return "hello";
+    return infixToPostfix(prefixToInfix(inStr));
 }
 
 // Yeah, we could use some library for this, but I'm not sure if I'm allowed to
@@ -249,4 +249,51 @@ int NotationConverter::p(const char &c) {
     if (c == '*' || c == '/') return 2;
     else if (c == '+' || c == '-') return 1;
     else return -1;
+}
+
+std::string NotationConverter::add_whitespace_to_string(const std::string &s) {
+    int new_index = 0;
+
+    // Create a buffer for the new string.
+    std::string output;
+
+    // For every character of the input string, == but the very last ==,
+    for (int i = 0; i < s.length() - 1 ; i++) {
+
+        // Append the character to the output
+        output += s[i];
+        
+        // If this character needs a space after it,
+        if (needs_spacing(s[i], s[i + 1])) {
+            // then do so.
+            output += " ";
+        }
+    }
+
+    return output;
+}
+
+bool NotationConverter::needs_spacing(const char &c1, const char &c2) {
+    // If a ) is followed by an operator, output true.
+    if (c1 == ')') {
+        if (c2 == '*' || c2 == '/' || c2 == '+' || c2 == '-') return true;
+    }
+
+    // If an operator is followed by a (, output true.
+    if (c1 == '*' || c1 == '/' || c1 == '+' || c1 == '-') {
+        if (c2 == '(') return true;
+    }
+
+    // If an operand is followed by an operator, output true.
+    if (c1 >= 'a' && c1 <= 'z' || c1 >= 'A' && c1 <= 'Z') {
+        if (c2 == '*' || c2 == '/' || c2 == '+' || c2 == '-') return true;
+    }
+
+    // If an operator is followed by an operand, output true.
+    if (c1 == '*' || c1 == '/' || c1 == '+' || c1 == '-') {
+        if (c2 >= 'a' && c2 <= 'z' || c2 >= 'A' && c2 <= 'Z') return true;
+    }
+
+    // Else, output false.
+    return false;
 }
