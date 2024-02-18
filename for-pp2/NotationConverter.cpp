@@ -13,7 +13,9 @@
 
 // Uses loop.
 std::string NotationConverter::postfixToInfix(std::string inStr) {
-    return prefixToInfix(postfixToPrefix(inStr));
+    std::string output = prefixToInfix(postfixToPrefix(inStr));
+    output = add_whitespace_to_string(output);
+    return output;
 }
 
 // Fully implemented.
@@ -62,6 +64,8 @@ std::string NotationConverter::postfixToPrefix(std::string inStr) {
         // Pop the top of the stack, and append it to the output.
         output += d.pop_front(); 
     }
+
+    output = add_whitespace_to_string(output);
 
     // Return the output string.
     return output;
@@ -152,12 +156,15 @@ std::string NotationConverter::infixToPostfix(std::string inStr) {
         d.pop_front();
     }
 
+    output = add_whitespace_to_string(output);
     return output;
 }
 
 // Uses loop.
 std::string NotationConverter::infixToPrefix(std::string inStr) {
-    return postfixToPrefix(infixToPostfix(inStr));
+    std::string output = postfixToPrefix(infixToPostfix(inStr));
+    output = add_whitespace_to_string(output);
+    return output;
 }
 
 // Fully implemented.
@@ -204,12 +211,15 @@ std::string NotationConverter::prefixToInfix(std::string inStr) {
         output += d.pop_front();
     }
 
+    output = add_whitespace_to_string(output);
     return output;
 }
 
 // Uses loop.
 std::string NotationConverter::prefixToPostfix(std::string inStr) {
-    return infixToPostfix(prefixToInfix(inStr));
+    std::string output = infixToPostfix(prefixToInfix(inStr));
+    output = add_whitespace_to_string(output);
+    return output;
 }
 
 // Yeah, we could use some library for this, but I'm not sure if I'm allowed to
@@ -270,6 +280,9 @@ std::string NotationConverter::add_whitespace_to_string(const std::string &s) {
         }
     }
 
+    // Append the very last character to the output.
+    output += s[s.length() - 1];
+
     return output;
 }
 
@@ -294,6 +307,31 @@ bool NotationConverter::needs_spacing(const char &c1, const char &c2) {
         if (c2 >= 'a' && c2 <= 'z' || c2 >= 'A' && c2 <= 'Z') return true;
     }
 
+    // If an operand is followed by an operand, output true.
+    if (c1 >= 'a' && c1 <= 'z' || c1 >= 'A' && c1 <= 'Z') {
+        if (c2 >= 'a' && c2 <= 'z' || c2 >= 'A' && c2 <= 'Z') return true;
+    }
+
     // Else, output false.
     return false;
+}
+
+bool NotationConverter::is_valid(const std::string &s) {
+    // For every character in the input string.
+    for (int i = 0; i < s.length(); i++) {
+        char c = s[i];
+
+        // If the character is valid,
+        if (c == '*' || c == '/' || c == '+' || c == '-' || c == '(' 
+            || c == ')' || c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z') {
+            // Continue to the next iteraction of the loop.
+            continue;
+        }
+
+        // This means that the character is not valid.
+        // So, we must return false.
+        return false;
+    }
+
+    return true;
 }

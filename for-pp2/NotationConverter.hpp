@@ -30,6 +30,10 @@ class NotationConverter : public NotationConverterInterface {
         // This is used to determine whether a sequence of characters needs a
         // space between them.
         bool needs_spacing(const char &c1, const char &c2);
+
+        // This is used to determine whether a string contains an invalid
+        // character.
+        bool is_valid(const std::string &s);
 };
 
 #endif
