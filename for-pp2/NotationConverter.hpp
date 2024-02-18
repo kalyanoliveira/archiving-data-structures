@@ -15,12 +15,8 @@ class NotationConverter : public NotationConverterInterface {
         virtual std::string prefixToPostfix(std::string inStr);
 
     private:
-        // I want to have a place in the class where I can have the input
-        // string with no spaces; easily readable.
-        std::string input_s;
-
-        // The same can be said for the output string.
-        std::string output_s;
+        // I mean, the name already implies what we want with this:
+        void clear_string_from_whitespace(std::string &s);
 };
 
 #endif
