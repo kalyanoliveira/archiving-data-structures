@@ -69,3 +69,9 @@ void NotationConverter::remove_whitespace_from_string(std::string &s) {
 
     return;
 }
+
+int NotationConverter::p(const char &c) {
+    if (c == '*' || c == '/') return 2;
+    else if (c == '+' || c == '-') return 1;
+    else return -1;
+}
