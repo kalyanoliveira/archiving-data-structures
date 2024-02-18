@@ -16,9 +16,11 @@ class NotationConverter : public NotationConverterInterface {
 
         // I mean, the name already implies what we want with this:
         void remove_whitespace_from_string(std::string &s);
+        
+        // void add_whitespace_to_string(std::string &s);
 
-        int p(const char &c);
     private:
+        int p(const char &c);
         // This returns an integer which represents the "precedence level" of
         // an operator (i.e., the precedence of the chars * / + and -).
 };

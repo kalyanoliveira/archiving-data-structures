@@ -4,14 +4,14 @@
 int main(void) {
     DLL dll;
 
-    dll.insert_node_after_head('a');
-    dll.insert_node_after_head('b');
-    dll.insert_node_after_head('c');
-    dll.insert_node_after_head('4');
-    dll.insert_node_before_tail('a');
-    dll.insert_node_before_tail('b');
-    dll.insert_node_before_tail('c');
-    dll.insert_node_before_tail('1');
+    dll.insert_node_after_head("a");
+    dll.insert_node_after_head("b");
+    dll.insert_node_after_head("c");
+    dll.insert_node_after_head("4");
+    dll.insert_node_before_tail("a");
+    dll.insert_node_before_tail("b");
+    dll.insert_node_before_tail("c");
+    dll.insert_node_before_tail("1");
     dll.test_linkage_by_printing();
 
     std::cout << dll.get_node_after_head_value() << std::endl;

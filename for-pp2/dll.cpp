@@ -1,6 +1,7 @@
 #include "dll.hpp"
 #include "dll-node.hpp"
 #include <iostream>
+#include <string>
 
 DLL::DLL() {
     // Allocate space in memory for two nodes, and make head and tail
@@ -26,7 +27,7 @@ bool DLL::empty() const {
     return head->next == tail;
 }
 
-void DLL::insert_node_after_head(const char &v) {
+void DLL::insert_node_after_head(const std::string &v) {
     // Create space for a new node in memory, and get a pointer to that
     // location
     DLNode *new_node = new DLNode;
@@ -47,7 +48,7 @@ void DLL::insert_node_after_head(const char &v) {
     head->next = new_node;
 }
 
-void DLL::insert_node_before_tail(const char &v) {
+void DLL::insert_node_before_tail(const std::string &v) {
     // Create space for a new node in memory, and get a pointer to that
     // location
     DLNode *new_node = new DLNode;
@@ -121,10 +122,10 @@ void DLL::test_linkage_by_printing() const {
     std::cout << std::endl;
 }
 
-char DLL::get_node_after_head_value() const {
+std::string DLL::get_node_after_head_value() const {
     return head->next->value;
 }
 
-char DLL::get_node_before_tail_value() const {
+std::string DLL::get_node_before_tail_value() const {
     return tail->prev->value;
 }

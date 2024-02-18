@@ -3,6 +3,7 @@
 #define DLL_H
 
 #include "dll-node.hpp"
+#include <string>
 
 class DLL {
     public:
@@ -12,8 +13,8 @@ class DLL {
 
         bool empty() const;
 
-        void insert_node_after_head(const char &v);
-        void insert_node_before_tail(const char &v);
+        void insert_node_after_head(const std::string &v);
+        void insert_node_before_tail(const std::string &v);
 
         void remove_node_after_head();
         void remove_node_before_tail();
@@ -28,8 +29,8 @@ class DLL {
         // This allows us to not have to worry about any exceptions here, and
         // only have to make sure that things work over on the deque-side of
         // things.
-        char get_node_after_head_value() const;
-        char get_node_before_tail_value() const;
+        std::string get_node_after_head_value() const;
+        std::string get_node_before_tail_value() const;
 
     private:
         // These are sentinel nodes: they won't hold any value that is

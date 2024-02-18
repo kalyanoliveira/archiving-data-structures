@@ -57,7 +57,7 @@ std::string NotationConverter::infixToPostfix(std::string inStr) {
             std::cout << "is an opening parentheses" << std::endl;
 
             // Push it to the top of the stack.
-            d.push_to_front('(');
+            d.push_to_front("(");
             // Jump to next iteration of the loop.
             continue;
         }
@@ -69,7 +69,7 @@ std::string NotationConverter::infixToPostfix(std::string inStr) {
             std::cout << "is an closing parentheses" << std::endl;
 
             // While the top element of the stack is not an opening parentheses (,
-            while (d.peek_front() != '(') {
+            while (d.peek_front()[0] != '(') {
                 // Append the top of the stack to the output.
                 output += d.peek_front();
                 // Pop the top of the stack.
@@ -95,8 +95,8 @@ std::string NotationConverter::infixToPostfix(std::string inStr) {
             // While the precedence of the operator on top of the stack is
             // greater than or equal to the precedence of the operator in
             // `inStr[i]`, OR while the stack is not empty,
-            while (!d.empty() && p(d.peek_front()) > p(inStr[i])
-                    || !d.empty() && p(d.peek_front()) == p(inStr[i])) {
+            while (!d.empty() && p(d.peek_front()[0]) > p(inStr[i])
+                    || !d.empty() && p(d.peek_front()[0]) == p(inStr[i])) {
                 // Append the top of the stack to the output.
                 output += d.peek_front();
                 // Pop the top of the stack.
@@ -109,7 +109,7 @@ std::string NotationConverter::infixToPostfix(std::string inStr) {
             // the operator in `inStr[i]`.
             
             // So let's just push `inStr[i]` to the top of the stack:
-            d.push_to_front(inStr[i]);
+            d.push_to_front(std::string(1, inStr[i]));
         }
 
     }

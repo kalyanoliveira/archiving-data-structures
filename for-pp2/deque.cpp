@@ -10,20 +10,20 @@ bool Deque::empty() const {
     return n == 0;
 }
 
-void Deque::push_to_front(const char &c) {
+void Deque::push_to_front(const std::string &c) {
     dll.insert_node_after_head(c);
     n++;
 }
 
-void Deque::push_to_back(const char &c) {
+void Deque::push_to_back(const std::string &c) {
     dll.insert_node_before_tail(c);
     n++;
 }
 
-char Deque::pop_front() {
+std::string Deque::pop_front() {
     if (empty()) throw DequeEmpty("Tried to pop front of Deque, but Deque is empty");
 
-    char front = dll.get_node_after_head_value();
+    std::string front = dll.get_node_after_head_value();
     dll.remove_node_after_head();
     
     n--;
@@ -31,10 +31,10 @@ char Deque::pop_front() {
     return front;
 }
 
-char Deque::pop_back() {
+std::string Deque::pop_back() {
     if (empty()) throw DequeEmpty("Tried to pop back of Deque, but Deque is empty");
 
-    char back = dll.get_node_before_tail_value();
+    std::string back = dll.get_node_before_tail_value();
     dll.remove_node_before_tail();
 
     n--;
@@ -42,16 +42,16 @@ char Deque::pop_back() {
     return back;
 }
 
-char Deque::peek_front() const {
+std::string Deque::peek_front() const {
     if (empty()) throw DequeEmpty("Tried to peek front of Deque, but Deque is empty");
 
-    char front = dll.get_node_after_head_value();
+    std::string front = dll.get_node_after_head_value();
     return front;
 }
 
-char Deque::peek_back() const {
+std::string Deque::peek_back() const {
     if (empty()) throw DequeEmpty("Tried to peek back of Deque, but Deque is empty");
 
-    char back = dll.get_node_before_tail_value();
+    std::string back = dll.get_node_before_tail_value();
     return back;
 }

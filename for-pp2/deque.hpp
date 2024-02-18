@@ -3,6 +3,7 @@
 
 #include "dll.hpp"
 #include "deque-empty-exception.hpp"
+#include <string>
 
 class Deque {
     public:
@@ -16,14 +17,14 @@ class Deque {
         // To use a deque like a stack, we use the front functions.
         // To use a deque like a queue, we push to the back, and pop the front. 
         
-        void push_to_front(const char &c);
-        void push_to_back(const char &c);
+        void push_to_front(const std::string &c);
+        void push_to_back(const std::string &c);
 
-        char pop_front();
-        char pop_back();
+        std::string pop_front();
+        std::string pop_back();
 
-        char peek_front() const;
-        char peek_back() const;
+        std::string peek_front() const;
+        std::string peek_back() const;
 
     private:
         DLL dll;
