@@ -1,8 +1,8 @@
 // Just a simple doubly linked list interface.
-#include "dll-node.hpp"
-
 #ifndef DLL_H
 #define DLL_H
+
+#include "dll-node.hpp"
 
 class DLL {
     public:
@@ -21,8 +21,13 @@ class DLL {
         // This'll basically try to print the list forwards and backwards; a
         // good way to check if any mistakes were made during the
         // implementation of this interface.
-        void test_linkage_by_printing();
+        void test_linkage_by_printing() const;
 
+        // Let's just assume that the user never does anything stupid with
+        // these. 
+        // This allows us to not have to worry about any exceptions here, and
+        // only have to make sure that things work over on the deque-side of
+        // things.
         char get_node_after_head_value() const;
         char get_node_before_tail_value() const;
 

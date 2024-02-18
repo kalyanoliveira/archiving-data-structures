@@ -91,7 +91,7 @@ void DLL::remove_node_before_tail() {
     if (empty()) return;
 
     // Bind a pointer to the node that we need to delete.
-    DLNode *node_to_delete = head->next;
+    DLNode *node_to_delete = tail->prev;
 
     // Make the prev of the tail-node be the prev of the node that we need to
     // delete.
@@ -105,7 +105,7 @@ void DLL::remove_node_before_tail() {
     delete node_to_delete;
 }
 
-void DLL::test_linkage_by_printing() {
+void DLL::test_linkage_by_printing() const {
     std::cout << "DLL: ";
 
     std::cout << "(Printing forwards) ";

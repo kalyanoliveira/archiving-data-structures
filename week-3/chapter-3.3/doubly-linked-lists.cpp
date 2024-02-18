@@ -63,6 +63,7 @@ DoublyLinkedList::DoublyLinkedList() {
 	head = new DoublyLinkedNode;
 	tail = new DoublyLinkedNode;
     head->next = tail;
+    tail->prev = head;
 }
 
 // Define the destructor here latter ig.

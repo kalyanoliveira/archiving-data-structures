@@ -1,7 +1,8 @@
-#include "dll.hpp"
-
 #ifndef DEQUE_H
 #define DEQUE_H
+
+#include "dll.hpp"
+#include "deque-empty-exception.hpp"
 
 class Deque {
     public:
