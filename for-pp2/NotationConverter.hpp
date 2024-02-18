@@ -2,7 +2,6 @@
 #define NOTATION_CONVERTER_H
 
 #include "NotationConverterInterface.hpp"
-#include "deque.hpp"
 
 class NotationConverter : public NotationConverterInterface {
     public:
@@ -16,7 +15,12 @@ class NotationConverter : public NotationConverterInterface {
         virtual std::string prefixToPostfix(std::string inStr);
 
     private:
+        // I want to have a place in the class where I can have the input
+        // string with no spaces; easily readable.
+        std::string input_s;
 
+        // The same can be said for the output string.
+        std::string output_s;
 };
 
 #endif
