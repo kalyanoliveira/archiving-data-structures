@@ -5,7 +5,7 @@
 int main(void) {
     NotationConverter nc;
 
-    std::string s = nc.infixToPostfix("(((A + B) / (X + Y)) - R)");
+    std::string s = nc.postfixToPrefix("X Y + A B + *");
 
     std::cout << s << std::endl;
 

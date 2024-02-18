@@ -18,7 +18,53 @@ std::string NotationConverter::postfixToInfix(std::string inStr) {
 
 // Fully implemented.
 std::string NotationConverter::postfixToPrefix(std::string inStr) {
-    return "hello";
+    remove_whitespace_from_string(inStr);
+
+    // We're going to use a stack adapted from a Deque.
+    // Only uses front-related methods.
+    Deque d;
+
+    // Creating the output string.
+    std::string output;
+
+    // For each character in the string,
+    for (int i = 0; i < inStr.length(); i++) {
+
+        // If the character is an operand, 
+        if (inStr[i] >= 'a' && inStr[i] <= 'z' || inStr[i] >= 'A' && inStr[i] <= 'Z') {
+            // Push it to the top of the stack.
+            d.push_to_front(std::string(1, inStr[i]));
+
+            // Jump to the next iteration of the loop.
+            continue;
+        }
+
+        // If the character is an operator,
+        if (inStr[i] == '*' || inStr[i] == '/' || inStr[i] == '+' || inStr[i] == '-') {
+
+            // Pop two strings from the top of the stack, saving each string in
+            // a different variable.
+            std::string first = d.pop_front();
+            std::string second = d.pop_front();
+
+            // Create a new string, concatenating `operator` + `second` +
+            // `first`.
+            std::string string_to_push = inStr[i] + second + first;
+
+            // Push that string that we concatenated.
+            d.push_to_front(string_to_push);
+        }
+
+    }
+
+    // While the stack is not empty,
+    while (!d.empty()) {
+        // Pop the top of the stack, and append it to the output.
+        output += d.pop_front(); 
+    }
+
+    // Return the output string.
+    return output;
 }
 
 // Fully implemented.
@@ -35,14 +81,8 @@ std::string NotationConverter::infixToPostfix(std::string inStr) {
     // For every character in the input string,
     for (int i = 0; i < inStr.length(); i++) {
 
-        // ==
-        std::cout << "curr char " << inStr[i] << " ";
-
         // If the character is an operand (i.e, a letter), 
         if (inStr[i] >= 'a' && inStr[i] <= 'z' || inStr[i] >= 'A' && inStr[i] <= 'Z') {
-
-            // ==
-            std::cout << "is a letter" << std::endl;
 
             // Append to output.
             output += inStr[i];
@@ -53,9 +93,6 @@ std::string NotationConverter::infixToPostfix(std::string inStr) {
         // If we get an opening parentheses (, 
         if (inStr[i] == '(') {
 
-            // ==
-            std::cout << "is an opening parentheses" << std::endl;
-
             // Push it to the top of the stack.
             d.push_to_front("(");
             // Jump to next iteration of the loop.
@@ -64,9 +101,6 @@ std::string NotationConverter::infixToPostfix(std::string inStr) {
 
         // If we get a closing parentheses ),
         if (inStr[i] == ')') {
-
-            // ==
-            std::cout << "is an closing parentheses" << std::endl;
 
             // While the top element of the stack is not an opening parentheses (,
             while (d.peek_front()[0] != '(') {
@@ -88,9 +122,6 @@ std::string NotationConverter::infixToPostfix(std::string inStr) {
         // Under our inputs, our only option right now is to have an operator.
         // Nevertheless, let's check for it:
         if (inStr[i] == '*' || inStr[i] == '/' || inStr[i] == '+' || inStr[i] == '-') {
-
-            // ==
-            std::cout << "is an operator" << std::endl;
 
             // While the precedence of the operator on top of the stack is
             // greater than or equal to the precedence of the operator in
