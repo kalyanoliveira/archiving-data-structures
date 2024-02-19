@@ -33,7 +33,7 @@ class NotationConverter : public NotationConverterInterface {
 
         // This is used to determine whether a string contains an invalid
         // character.
-        bool is_valid(const std::string &s);
+        void is_valid(const std::string &s);
 };
 
 #endif

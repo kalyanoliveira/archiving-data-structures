@@ -2,6 +2,7 @@
 #include <string>
 #include "deque.hpp"
 #include <iostream>
+#include "invalid-input-string-exception.hpp"
 
 // We'll implement the following functions "fully:"
 // - infix to postfix
@@ -13,6 +14,7 @@
 
 // Uses loop.
 std::string NotationConverter::postfixToInfix(std::string inStr) {
+    is_valid(inStr);
     std::string output = prefixToInfix(postfixToPrefix(inStr));
     output = add_whitespace_to_string(output);
     return output;
@@ -20,6 +22,7 @@ std::string NotationConverter::postfixToInfix(std::string inStr) {
 
 // Fully implemented.
 std::string NotationConverter::postfixToPrefix(std::string inStr) {
+    is_valid(inStr);
     remove_whitespace_from_string(inStr);
 
     // We're going to use a stack adapted from a Deque.
@@ -73,6 +76,7 @@ std::string NotationConverter::postfixToPrefix(std::string inStr) {
 
 // Fully implemented.
 std::string NotationConverter::infixToPostfix(std::string inStr) {
+    is_valid(inStr);
     remove_whitespace_from_string(inStr);
 
     // Get a stack by adapting it from a deque.
@@ -162,6 +166,7 @@ std::string NotationConverter::infixToPostfix(std::string inStr) {
 
 // Uses loop.
 std::string NotationConverter::infixToPrefix(std::string inStr) {
+    is_valid(inStr);
     std::string output = postfixToPrefix(infixToPostfix(inStr));
     output = add_whitespace_to_string(output);
     return output;
@@ -169,6 +174,7 @@ std::string NotationConverter::infixToPrefix(std::string inStr) {
 
 // Fully implemented.
 std::string NotationConverter::prefixToInfix(std::string inStr) {
+    is_valid(inStr);
     remove_whitespace_from_string(inStr);
 
     // Use a deque as a stack.
@@ -217,6 +223,7 @@ std::string NotationConverter::prefixToInfix(std::string inStr) {
 
 // Uses loop.
 std::string NotationConverter::prefixToPostfix(std::string inStr) {
+    is_valid(inStr);
     std::string output = infixToPostfix(prefixToInfix(inStr));
     output = add_whitespace_to_string(output);
     return output;
@@ -316,7 +323,7 @@ bool NotationConverter::needs_spacing(const char &c1, const char &c2) {
     return false;
 }
 
-bool NotationConverter::is_valid(const std::string &s) {
+void NotationConverter::is_valid(const std::string &s) {
     // For every character in the input string.
     for (int i = 0; i < s.length(); i++) {
         char c = s[i];
@@ -329,9 +336,9 @@ bool NotationConverter::is_valid(const std::string &s) {
         }
 
         // This means that the character is not valid.
-        // So, we must return false.
-        return false;
+        // So, we must throw an `InvalidInputString`.
+        throw(InvalidInputString());
     }
 
-    return true;
+    return;
 }
