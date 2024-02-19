@@ -330,7 +330,8 @@ void NotationConverter::is_valid(const std::string &s) {
 
         // If the character is valid,
         if (c == '*' || c == '/' || c == '+' || c == '-' || c == '(' 
-            || c == ')' || c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z') {
+            || c == ')' || c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z'
+            || c == ' ') {
             // Continue to the next iteraction of the loop.
             continue;
         }

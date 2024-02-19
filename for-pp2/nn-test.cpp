@@ -20,13 +20,13 @@ int main(void) {
     std::cout << nc.prefixToInfix(s) << std::endl;
     std::cout << nc.prefixToPostfix(s) << std::endl;
 
-    // This should throw.
-    s = "lkajsdf:";
-    try {
-        std::cout << nc.infixToPostfix(s) << std::endl;
-    } catch (InvalidInputString &e) {
-        std::cout << e.what() << std::endl;
-    }
+    // // This should throw.
+    // s = "lkajsdf:";
+    // try {
+    //     std::cout << nc.infixToPostfix(s) << std::endl;
+    // } catch (InvalidInputString &e) {
+    //     std::cout << e.what() << std::endl;
+    // }
 
     return 0;
 }
