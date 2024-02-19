@@ -318,6 +318,12 @@ bool NotationConverter::needs_spacing(const char &c1, const char &c2) {
     if (c1 >= 'a' && c1 <= 'z' || c1 >= 'A' && c1 <= 'Z') {
         if (c2 >= 'a' && c2 <= 'z' || c2 >= 'A' && c2 <= 'Z') return true;
     }
+    
+    // If an operator is followed by an operator, output true.
+    if (c1 == '*' || c1 == '/' || c1 == '+' || c1 == '-') {
+        if (c2 == '*' || c2 == '/' || c2 == '+' || c2 == '-') return true;
+    }
+
 
     // Else, output false.
     return false;
