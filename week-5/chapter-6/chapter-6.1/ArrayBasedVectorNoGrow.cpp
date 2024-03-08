@@ -87,8 +87,8 @@ void Vector::erase(int index) {
     // elements of the array up until the index with the last element of the
     // array.
     int j = index;
-    // We shouldn't try to change the value of the very last element, hence `j
-    // < number_of_elements - 1`.
+    // We shouldn't try to change the value of the very last element, hence 
+    // `j < number_of_elements - 1`.
     while (j < number_of_elements - 1) {
         elements[j] = elements[j + 1];
         j++;
@@ -103,15 +103,12 @@ void Vector::erase(int index) {
 }
 
 void Vector::set(int index, int element) {
-    // If we try to erase a negative index, or an index higher than the index
+    // If we try to set a negative index, or an index higher than the index
     // of the last element, throw an out of bounds exception.
     if (index < 0 || index > number_of_elements - 1) throw OutOfBounds();
 
     // Then we can simply set the new element...
     elements[index] = element;
-
-    //... and increase the total number of elements.
-    number_of_elements++;
 
     return;
 }
