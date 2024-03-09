@@ -85,7 +85,11 @@ void Entries::sort() {
         // the entry located at the index that we could potentially shift has a
         // larger value than the last entry in the sub-sized array,
         while (next_shift_index >= 0 && entries[next_shift_index].get_value() > last_entry_value) {
+            // Make the last value of the sub-array equal the second to last value.
             entries[last_entry_index] = entries[next_shift_index];
+
+            // Decrease our notions of "last value" and "second to last value"
+            // by one.
             last_entry_index = next_shift_index;
             next_shift_index--;
         }
