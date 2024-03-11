@@ -1,3 +1,4 @@
+#include <iostream>
 #include "ll.hpp"
 #include "n.hpp"
 
@@ -9,7 +10,13 @@ LinkedList::~LinkedList() {
     while (!empty()) front_remove();
 }
 
+bool LinkedList::empty() const {
+    return head == nullptr;
+}
+
 int LinkedList::size() const {
+    if (empty()) return 0;
+
     int count = 0;
     for (Node *temp = head;
         temp != nullptr; 
@@ -19,16 +26,12 @@ int LinkedList::size() const {
     return count;
 }
 
-bool LinkedList::empty() const {
-    return head == nullptr;
-}
-
 void LinkedList::front_insert(const int v) {
     Node *new_node = new Node;
 
     new_node->value = v;
 
-    new_node->next = head->next;
+    new_node->next = head;
     head = new_node;
 
     return;
@@ -125,11 +128,36 @@ void LinkedList::insert_before(const Node &n, const int v) {
 
 
 void LinkedList::sort() {
+    if (size() <= 1) return;
     // I'll just do bubble sort because I need to practice that shit.
+    int subsize;
+    Node *prev;
+    Node *curr;
+    bool swapped;
+    
+    // For every possible subsize,
+    for (subsize = size(); subsize > 0; subsize--) {
+        // For every consecutive pair of elements in that subsize,
+        for (prev = head, curr = head->next;
+            curr != nullptr;
+            prev = curr, curr = curr->next
+        ) {
+
+        }
+
+    }
 }
 
 
 // This should be done recursively.
 void LinkedList::print() {
-
+    print_internal(head);
+    std::cout << std::endl;
+}
+void LinkedList::print_internal(Node *n) {
+    if (n != nullptr) {
+        std::cout << n->value << " ";
+        print_internal(n->next);
+    }
+    return;
 }

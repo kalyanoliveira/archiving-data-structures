@@ -8,8 +8,8 @@ class LinkedList {
         LinkedList();
         ~LinkedList();
 
-        int size() const;
         bool empty() const;
+        int size() const;
 
         void front_insert(const int v);
         void front_remove();
@@ -24,6 +24,7 @@ class LinkedList {
 
         // This should be done recursively.
         void print();
+        void print_internal(Node *n);
         
     private:
         Node *head;
