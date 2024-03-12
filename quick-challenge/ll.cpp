@@ -142,9 +142,15 @@ void LinkedList::sort() {
             curr != nullptr;
             prev = curr, curr = curr->next
         ) {
-
+            if (prev->value > curr->value) {
+                int temp = prev->value;
+                prev->value = curr->value;
+                curr->value = temp;
+                swapped = true;
+            }
         }
 
+        if (swapped == false) break;
     }
 }
 

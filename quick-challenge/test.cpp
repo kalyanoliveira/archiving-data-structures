@@ -9,6 +9,7 @@ int main(void) {
     ll.back_insert(5);
     ll.back_insert(10);
     ll.back_insert(4);
+    ll.sort();
     ll.print();
 
     Node v;
