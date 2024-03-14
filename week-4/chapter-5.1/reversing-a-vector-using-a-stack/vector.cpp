@@ -1,6 +1,7 @@
 #include "vector.hpp"
 #include "empty.hpp"
 #include "index-exception.hpp"
+#include <iostream>
 
 Vector::Vector() {
     capacity = 0;
@@ -72,6 +73,24 @@ void Vector::insert(const int index, const int element) {
     return;
 }
 
+void Vector::erase(const int index) {
+    // Check for an invalid index.
+    if (index < 0 || index > n - 1) 
+        throw IndexException("Tried erasing an invalid index of Vector, in erase()");
+
+    // Move every element from the left of the index one unit leftwards,
+    // starting from the index and ending at the second to last element.
+    // "ending at the second to last element" means excluding the last element, hence j < n - 1
+    for (int j = index; j < n - 1; j++) {
+        a[j] = a[j + 1];
+    }
+
+    // Decrease the element count.
+    n--;
+
+    return; 
+}
+
 void Vector::resize(const int c) {
     // Check if the current capacity is already enough.
     if (capacity == c) return;
@@ -87,4 +106,9 @@ void Vector::resize(const int c) {
     a = new_a;
 
     return;
+}
+
+void Vector::print() const {
+    for (int i = 0; i < n; i++) std::cout << a[i] << " ";
+    std::cout << std::endl;
 }
