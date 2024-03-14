@@ -1,0 +1,56 @@
+
+class Iterator {
+friend class IteratedDLL;
+public:
+    // Dereferencing an iterator should return an integer because
+    // that is what a node holds.
+    int &operator*() const;
+
+    bool operator==(const Iterator &other) const;
+    bool operator!=(const Iterator &other) const;
+
+    // These are actually so clutch.
+    // They are essentially what gives the Iterator its "iterating" capabilities.
+    Iterator &operator++();
+    Iterator &operator--();
+
+private:
+    Node *internal_node;
+    Iterator(Node *node);
+};
+
+
+
+
+
+
+    class Node {
+        friend class DLL;
+    private:
+        int value;
+        Node *next;   
+        Node *prev;
+    };
+
+
+
+
+
+
+
+
+
+class IteratedDLL {
+public:
+    IteratedDLL();
+    ~IteratedDLL();
+
+    bool empty() const; 
+    int size() const;
+
+
+    // Sentinel nodes. They do not hold any value.
+    Node *head; 
+    Node *tail;
+
+};
