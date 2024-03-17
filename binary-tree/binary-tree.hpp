@@ -49,6 +49,7 @@ class BinaryTree {
         Position remove_above_external(const Position& p);
 
         void preorder_print() const;
+        void inorder_print() const;
 
     private:
         Node* root;
@@ -57,6 +58,7 @@ class BinaryTree {
         void preorder_for_get_positions(Node* a_node, List<Position>& pl) const;
 
         void _preorder_print(const Position& p) const;
+        void _inorder_print(const Position& p) const;
 };
 
 // int depth(const BinaryTree<int>& t, const BinaryTree<int>::Position& p) {
@@ -242,4 +244,26 @@ void BinaryTree<T>::_preorder_print(const Position& p) const {
         std::cout << ") ";
     }
 }
+
+template <typename T>
+void BinaryTree<T>::inorder_print() const {
+    _inorder_print(Position(root));
+    std::cout << std::endl;
+}
+
+template <typename T>
+void BinaryTree<T>::_inorder_print(const Position& p) const {
+    if (p.is_external());
+    else {
+        _inorder_print(p.left());
+    }
+
+    std::cout << *p << " ";
+
+    if (p.is_external());
+    else {
+        _inorder_print(p.right());
+    }
+}
+
 #endif

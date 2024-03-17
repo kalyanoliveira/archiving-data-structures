@@ -23,6 +23,7 @@ int main(void) {
 
     // Outputs `0 ( 1 ( 2 3 ) 4 )`
     bt.preorder_print();
+    bt.inorder_print();
 
     // Gets an iter to an external node and call `remove_above_external` on it.
     BinaryTree<int>::Position exter = p.left();
