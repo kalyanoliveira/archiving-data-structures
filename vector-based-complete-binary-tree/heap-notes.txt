@@ -1,0 +1,37 @@
+you can implement a priority queue with a heap
+
+for every insertion the elements are stored nicely from smallest to largest
+
+for every removal of the smallest element, you copy the "last element" to the root, and then down-heap bubbling occurs,
+where you resort the heap
+
+
+---
+
+how to perform in place heap sort
+
+use the left side of the array to store the max elements during the insertion phase
+this requires a reverted comparator (a is_greater(), rather than a is_less())
+
+remove 
+
+
+
+
+
+----
+
+
+occurs during insertion
+up heap bubbling: when the comparator used is is_less(), and the last element is too small
+                  when the comparator used is is_greater(), and the last element is very big
+
+occurs during removal
+down heap bubbling: when the comparator used is is_less(), and the top element is very big
+down heap bubbling: when the comparator used is is_greater(), and the top element is too small
+
+
+---
+
+
+a bottom up heap construction is actually faster than the insertion method used in heap sort
