@@ -12,7 +12,6 @@ void merge_sort(std::list<E>& l, const C& is_less_comparator) {
     // Returns if `l` is already sorted (i.e. if the size of `l` is <= 1).
     if (l.size() <= 1) return;
 
-
     // Divides the sorting task midway between `l`, since `l` is not already
     // sorted.
     std::list<E> l1, l2;

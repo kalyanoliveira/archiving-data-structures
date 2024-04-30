@@ -33,6 +33,8 @@ void merge_sort(std::vector<E>& v, const C& is_less_comparator) {
         }
         // This is how we "pass the resultant vector of one merge to the merge
         // with the next corresponding larger size."
+        // We are essentially saying "make the input of the next iteration the
+        // output we got from this iteration.
         std::swap(in, out);
     }
     // We use `in` because of `std::swap(in, out);`.
@@ -52,6 +54,11 @@ void merge(
 
     int i = start;
     int j = start + size;
+    // Make the "end conditions" of i and j "proper."
+    // That is, if we find out that the "end condition" index of i is beyond
+    // the actual size of our entire array, let's just make the end condition
+    // of i the size of the array.
+    // The same applies for j.
     int i_end = (i + size < in.size()) ? (i + size) : (in.size());
     int j_end = (j + size < in.size()) ? (j + size) : (in.size());
 

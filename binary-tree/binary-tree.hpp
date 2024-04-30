@@ -255,13 +255,16 @@ void BinaryTree<T>::inorder_print() const {
 
 template <typename T>
 void BinaryTree<T>::_inorder_print(const Position& p) const {
+    // First left
     if (p.is_external());
     else {
         _inorder_print(p.left());
     }
 
+    // Then root.
     std::cout << *p << " ";
 
+    // Then right.
     if (p.is_external());
     else {
         _inorder_print(p.right());

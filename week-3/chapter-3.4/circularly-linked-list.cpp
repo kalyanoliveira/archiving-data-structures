@@ -73,7 +73,7 @@ void CircularlyLinkedList::add_node_after_cursor(const int &v) {
     }
 
     // This means that the list is not empty.
-    // Make the next of the new node by the next of the cursor.
+    // Make the next of the new node be the next of the cursor.
     new_node->next = cursor->next;    
 
     // Make the next of the cursor be the new node.
